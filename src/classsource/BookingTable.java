@@ -16,7 +16,6 @@ class BookingTable extends AbstractTableModel {
 
     String defaultStatus = "available";
     String bookedStatus = "booked";
-    
     Object[][] p = {
     		{now(), defaultStatus, defaultStatus, defaultStatus},
     		{now(), defaultStatus, defaultStatus, defaultStatus},

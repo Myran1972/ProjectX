@@ -17,7 +17,7 @@ import java.sql.Statement;
 */
 
 public class DBUtils{ 
-   private final static String DB_CONN_STR = "jdbc:sqlite:https://github.com/Myran1972/ProjectX.git/projectX";
+   private final static String DB_CONN_STR = "jdbc:sqlite:C:/cygwin64/home/cathrine/Prj_testVerktyg/Test1";
    static{
        try{
            Class.forName("org.sqlite.JDBC");

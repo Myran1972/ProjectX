@@ -1,0 +1,7 @@
+PRAGMA foreign_keys=ON;
+BEGIN TRANSACTION;
+CREATE TABLE IF NOT EXISTS StaffSchedule(Schedule TEXT UNIQUE);
+INSERT INTO StaffSchedule VALUES ('MF');
+INSERT INTO StaffSchedule VALUES ('LS');
+INSERT INTO StaffSchedule VALUES ('S');
+COMMIT;

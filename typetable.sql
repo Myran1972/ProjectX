@@ -1,0 +1,12 @@
+PRAGMA foreign_keys=ON;
+BEGIN TRANSACTION;
+CREATE TABLE IF NOT EXISTS TypeTable(LicenseType TEXT UNIQUE, PersonPrice INTEGER, TruckType TEXT UNIQUE, TruckPrice INTEGER, VolumeType TEXT UNIQUE);
+INSERT INTO TypeTable VALUES ('A', 500, 'A001', 1000, 'A005');      
+INSERT INTO TypeTable VALUES ('AA', 700, 'AA01', 1500, 'AA07');      
+INSERT INTO TypeTable VALUES ('B', 900, 'B001', 2000, 'B005');       
+INSERT INTO TypeTable VALUES ('BB', 1000, 'BB01', 2500, 'BB07');       
+INSERT INTO TypeTable VALUES ('C', 1250, 'C001', 3000, 'C005');       
+INSERT INTO TypeTable VALUES ('CC', 1500, 'CC01', 3500, 'CC07');       
+INSERT INTO TypeTable VALUES ('CCC', 3000, 'CCC1', 4000, 'CCC5');      
+INSERT INTO TypeTable VALUES ('K', 3500, 'K001', 4500, 'K007');       
+COMMIT;

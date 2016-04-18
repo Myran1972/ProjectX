@@ -1,0 +1,8 @@
+PRAGMA foreign_keys=ON;
+BEGIN TRANSACTION;
+CREATE TABLE IF NOT EXISTS TruckStatus(Status TEXT UNIQUE);
+INSERT INTO TruckStatus VALUES ('OK');
+INSERT INTO TruckStatus VALUES ('Reserv');
+INSERT INTO TruckStatus VALUES ('Skada');
+INSERT INTO TruckStatus VALUES ('Reparation');
+COMMIT;

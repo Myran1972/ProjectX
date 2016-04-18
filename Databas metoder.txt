@@ -1,48 +1,3 @@
-Databas connection metoder
-
-Metod hämta anställda, sök på anställda baserat på status, sök på anställda på schema
-
-Metod att hämta truck, status, typ
-
-Metod att hämta kaj, ledig
-
-    public void testQuery(){
-        if(hasConnection()){
-            Statement stm = null;
-            ResultSet rs  = null;
-            try{
-                String query="SELECT Name, HTTPS FROM municipalities LIMIT 5";
-                stm = con.createStatement();
-                rs = stm.executeQuery(query);
-                while(rs.next()){
-                    System.out.println(rs.getString("Name") + " " + (rs.getBoolean("HTTPS")?"HTTPS support":"HTTP only"));
-                }
-            }catch(SQLException sqle){
-                System.err.println(sqle.getMessage());
-            }finally{
-                closeBoth(rs, stm);
-            }
-        }
-    }
-	
-	    public int updateHTTPS(String name, boolean https){
-        String SQL = "UPDATE municipalities SET HTTPS=" + 
-            (https?"1":"0") + 
-            " WHERE Name='" + name + "'";
-        Statement stm = null;
-        int rows = -1;
-        try{
-            stm  = con.createStatement();
-            rows = stm.executeUpdate(SQL);
-        }catch(Exception e){
-            System.err.println("Exception updating https for " + name 
-                               + " " + e.getMessage());
-        }finally{
-            closeIt(stm);
-            return rows;
-        }
-    }
-	
 	public void getDockByVolumeType(String volType){
 		if(hasConnection()){
 			Statement stm = null;
@@ -54,7 +9,8 @@ Metod att hämta kaj, ledig
 			   }catch(SQLException sqle){
 				   System.err.println(sqle.getMessage());
 			   }finally{
-				   closeBoth(rs, stm);
+				rs.close();
+				stm.close();
 			   }
 		}
 	}
@@ -72,8 +28,9 @@ Metod att hämta kaj, ledig
 				
 			}catch(SQLException sqle){
 				System.err.println(sqle.getMessage());
-			}Finally{
-				closeBoth(rs, stm);
+			}finally{
+				rs.close();
+				stm.close();;
 			}
 		}
 	}
@@ -85,10 +42,55 @@ Metod att hämta kaj, ledig
 			Statement stm = null;
 			ResultSet rs = null;
 			try{
-			String sql = "SELECT * FROM Trucks WHERE Type='" + truck + "' AND Status='OK';"
+				String sql = "SELECT * FROM Trucks WHERE Type='" + truck + "' AND Status='OK';"
+				stm = con.createStatement();
+				rs = stm.executeQuery(sql);
 			}catch(SQLException sqle){
-			}Finally{
-				closeBoth(rs, stm),
+				System.err.println(sqle.getMessage());
+			}finally{
+				rs.close();
+				stm.close();
 			}
 		}
+	}
+	public void getDock_One(String firstDate, String secondDate){
+		if(hasConnection()){
+			Statement stm = null;
+			ResultSet rs = null;
+			try{
+				String sql = "SELECT * FROM Dock_1 WHERE Date BETWEEN='" + firstDate + "' AND='" secondDate "';"
+				
+				stm = con-createStatement();
+				rs = stm.executeQuery(sql);
+			}catch(SQLException sqle){
+				System.err.println(sqle.getMessage());
+			}finally{
+				rs.close();
+				stm.close();
+			}
+		}
+	}
+	public void bookDock_Onen(String date, String time, String sName, int SID, int PID, String lastName, int PP, String TID, int TP){
+		if(hasConnection()){
+			Statement stm = null;
+			ResultSet rs = null;
+			try{
+				String sql = "INSERT INTO Dock_1 (Date, TimeInterval, ShipName, ShipID, PersonID, Lastname, PersonPrice, TruckID, TruckPrice)" + 
+				"VALUES ('"+ date +"', '"+ time +"', '" + sName + "', "+ SID +", "+ PID +", '"+ lastName +"', "+ PP +", '"+ TID +"', "+ TP+");"
+				
+				stm = con-createStatement();
+				rs = stm.executeQuery(sql);
+			}catch(SQLException sqle){
+				System.err.println(sqle.getMessage());
+			}finally{
+				rs.close();
+				stm.close();
+			}
+		}
+	}
+	public void getDock_Two(){
+		
+	}
+	public void getDock_Three(){
+		
 	}

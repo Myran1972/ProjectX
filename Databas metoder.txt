@@ -1,9 +1,9 @@
 	public void getDockByVolumeType(String volType){
 		if(hasConnection()){
+			String sql = "SELECT * FROM Dock WHERE VolumeType='" + volType + "';"
 			Statement stm = null;
 			ResultSet rs = null;
 			try{
-				String sql = "SELECT * FROM Dock WHERE VolumeType='" + volType + "';"
 				stm = con.createStatement();
 				   rs = stm.executeQuery(sql);
 			   }catch(SQLException sqle){
@@ -16,10 +16,10 @@
 	}
 	public void getShipVol(String Name, String ID){
 		if(hasConnection()){
+			String sql = "SELECT VolumeType FROM Ships WHERE Name='" + Name + "' AND ID='" + ID + "';";
 			Statement stm = null;
 			ResultSet rs = null;
 			try{
-			String sql = "SELECT VolumeType FROM Ships WHERE Name='" + Name + "' AND ID='" + ID + "';";
 				stm = con.createStatement();
 				   rs = stm.executeQuery(sql);
 				while(rs.next()){
@@ -42,7 +42,7 @@
 			Statement stm = null;
 			ResultSet rs = null;
 			try{
-				String sql = "SELECT * FROM Trucks WHERE Type='" + truck + "' AND Status='OK';"
+				String sql = "SELECT * FROM Trucks WHERE Type='" + truck + "' AND Status='OK' OR Status='Reserv';"
 				stm = con.createStatement();
 				rs = stm.executeQuery(sql);
 			}catch(SQLException sqle){
@@ -53,12 +53,12 @@
 			}
 		}
 	}
-	public void getDock_One(String firstDate, String secondDate){
+	public void getDock_One(String dock, String firstDate, String secondDate){
 		if(hasConnection()){
 			Statement stm = null;
 			ResultSet rs = null;
 			try{
-				String sql = "SELECT * FROM Dock_1 WHERE Date BETWEEN='" + firstDate + "' AND='" secondDate "';"
+				String sql = "SELECT * FROM " + dock + "_1 WHERE Date BETWEEN='" + firstDate + "' AND='" secondDate "';"
 				
 				stm = con-createStatement();
 				rs = stm.executeQuery(sql);
@@ -70,12 +70,12 @@
 			}
 		}
 	}
-	public void bookDock_Onen(String date, String time, String sName, int SID, int PID, String lastName, int PP, String TID, int TP){
+	public void bookDock_Onen(String dock, String date, String time, String sName, int SID, int PID, String lastName, int PP, String TID, int TP){
 		if(hasConnection()){
 			Statement stm = null;
 			ResultSet rs = null;
 			try{
-				String sql = "INSERT INTO Dock_1 (Date, TimeInterval, ShipName, ShipID, PersonID, Lastname, PersonPrice, TruckID, TruckPrice)" + 
+				String sql = "INSERT INTO " + dock + "_1 (Date, TimeInterval, ShipName, ShipID, PersonID, Lastname, PersonPrice, TruckID, TruckPrice)" + 
 				"VALUES ('"+ date +"', '"+ time +"', '" + sName + "', "+ SID +", "+ PID +", '"+ lastName +"', "+ PP +", '"+ TID +"', "+ TP+");"
 				
 				stm = con-createStatement();
@@ -88,9 +88,4 @@
 			}
 		}
 	}
-	public void getDock_Two(){
-		
-	}
-	public void getDock_Three(){
-		
-	}
+

@@ -22,7 +22,8 @@ public class DBMethods extends Database {
 					   String id = rs.getString("ID");
 					   String name = rs.getString("Name");
 					   String volumetype = rs.getString("VolumeType");
-					   return "ID = " + id + ", Name = "+ name + ", VolumeType = "+ volumetype;
+					   //return "ID = " + id + ", Name = "+ name + ", VolumeType = "+ volumetype;
+					   return name;
 					   
 				   }
 			   }catch(SQLException sqle){

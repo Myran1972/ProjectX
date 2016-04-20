@@ -171,8 +171,12 @@ public class Main extends JFrame implements Runnable{
         
         JButton TB_Booking = new JButton();
         TB_Booking.setToolTipText("Booking");
-        JButton TB_Rename = new JButton();
-        TB_Rename.setToolTipText("Exit system");
+        
+        JButton TB_BookingReport = new JButton();
+        TB_BookingReport.setToolTipText("Booking Report");
+        
+        JButton TB_Exit = new JButton();
+        TB_Exit.setToolTipText("Exit system");
         
 
         jToolBar1.setMaximumSize(new java.awt.Dimension(600, 50));//Set menu max value
@@ -214,16 +218,24 @@ public class Main extends JFrame implements Runnable{
         		}
         	});
         jToolBar1.add(TB_Booking);
+
+        TB_BookingReport.setIcon(new ImageIcon("image//5.jpg"));
+        TB_BookingReport.addActionListener(new ActionListener(){
+        	public void actionPerformed(ActionEvent e){
+        		
+        		deskpane.add(new BookingReport());
+        		}
+        	});
+        jToolBar1.add(TB_BookingReport);        
         
         
-        
-        TB_Rename.setIcon(new javax.swing.ImageIcon("image//6.png"));
-        TB_Rename.addActionListener(new ActionListener(){
+        TB_Exit.setIcon(new javax.swing.ImageIcon("image//7.png"));
+        TB_Exit.addActionListener(new ActionListener(){
         	public void actionPerformed(ActionEvent e){
                 System.exit(0);
         		}
         	});        
-		jToolBar1.add(TB_Rename);
+		jToolBar1.add(TB_Exit);
 		
 			
 		

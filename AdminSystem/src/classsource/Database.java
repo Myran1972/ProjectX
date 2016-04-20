@@ -8,7 +8,7 @@ public class Database {
     public static Statement stm;
     public static ResultSet rs;
 
-    final String DB_CONN_STR = "jdbc:sqlite:C:\\Users\\Jakob\\Documents\\GitHub\\ProjectX\\projectX";
+    final String DB_CONN_STR = "jdbc:sqlite:C:\\Users\\cathrine\\Desktop\\ProjectX\\AdminSystem\\projectX";
   	static{
     	try{
     	Class.forName("org.sqlite.JDBC");

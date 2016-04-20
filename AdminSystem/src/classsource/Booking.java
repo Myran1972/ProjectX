@@ -120,16 +120,16 @@ public class Booking extends JInternalFrame{
 
 		bookingBtn.addActionListener(new ActionListener(){
 	   		public void actionPerformed(ActionEvent event){
-	   			
-	   			JOptionPane optionPane = new JOptionPane("Do you want to by\n" 
-	   													+ "create a report?", 
-	   													JOptionPane.YES_NO_OPTION);
-	   			
+	   			int n = JOptionPane.showConfirmDialog(
+	   				    null,
+	   				    "Would you like to print booking report?",
+	   				    "Print report",
+	   				    JOptionPane.YES_NO_OPTION);
 	   			//String insertBooking = "insert into Dock_1(Date, TimeInterval) values(" + "'2016-04-18'" + "'00-08" + "')";
         		
-	   			String sql = "UPDATE Dock_1 SET TimeInterval='" + getBookedIntervalStr + "'" +
-						"WHERE Date='" + getDateStr + "';";
-	   			ResultSet rs = db.executeQuery(sql);
+	   			//String sql = "UPDATE Dock_1 SET TimeInterval='" + getBookedIntervalStr + "'" +
+						//"WHERE Date='" + getDateStr + "';";
+	   			//ResultSet rs = db.executeQuery(sql);
    			
 	   		}});
 		

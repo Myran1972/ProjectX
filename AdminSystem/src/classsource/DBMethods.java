@@ -99,7 +99,7 @@ public class DBMethods extends Database {
 			Statement stm = null;
 			ResultSet rs = null;
 			try{
-				String sql = "SELECT * FROM " + dock_0 + " WHERE Date BETWEEN='" + firstDate + "' AND='" + secondDate + "';";
+				String sql = "SELECT * FROM " + dock_0 + " WHERE Date BETWEEN '" + firstDate + "' AND '" + secondDate + "';";
 				stm = con.createStatement();
 				rs = stm.executeQuery(sql);
 				while(rs.next()){
@@ -119,6 +119,7 @@ public class DBMethods extends Database {
 				}
 			}
 		}
+		return null;
 	}
 	public void bookDock(String dock_0, String date, String time, String sName, int SID, int PID, String lastName, int PP, String TID, int TP){
 		if(hasConnection()){

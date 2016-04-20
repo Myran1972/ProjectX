@@ -8,7 +8,7 @@ public class Database {
     public static Statement stm;
     public static ResultSet rs;
 
-    final String DB_CONN_STR = "jdbc:sqlite:C:/cygwin64/home/cathrine/Prj_testVerktyg/Test1";
+    final String DB_CONN_STR = "jdbc:sqlite:C:\\Users\\Jakob\\Documents\\GitHub\\ProjectX\\projectX";
   	static{
     	try{
     	Class.forName("org.sqlite.JDBC");
@@ -16,7 +16,7 @@ public class Database {
     	System.err.println("Could not load driver: "+cnfe.getMessage());
     	}
     }
-    private static Connection con;
+    public static Connection con;
     
     public Database(){
     	getConnection();

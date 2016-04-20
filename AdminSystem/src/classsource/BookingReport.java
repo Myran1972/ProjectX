@@ -23,7 +23,7 @@ public class BookingReport extends JInternalFrame {
         con.add(labe2);
         con.add(labe3);
         con.add(labe4);
-        con.setBackground(Color.gray);
+        con.setBackground(Color.lightGray);
 
 
  	    setResizable(false);

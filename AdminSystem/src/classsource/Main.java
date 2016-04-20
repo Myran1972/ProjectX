@@ -219,7 +219,7 @@ public class Main extends JFrame implements Runnable{
         	});
         jToolBar1.add(TB_Booking);
 
-        TB_BookingReport.setIcon(new ImageIcon("image//5.jpg"));
+        TB_BookingReport.setIcon(new ImageIcon("image//7.jpg"));
         TB_BookingReport.addActionListener(new ActionListener(){
         	public void actionPerformed(ActionEvent e){
         		
@@ -229,7 +229,7 @@ public class Main extends JFrame implements Runnable{
         jToolBar1.add(TB_BookingReport);        
         
         
-        TB_Exit.setIcon(new javax.swing.ImageIcon("image//7.png"));
+        TB_Exit.setIcon(new javax.swing.ImageIcon("image//6.png"));
         TB_Exit.addActionListener(new ActionListener(){
         	public void actionPerformed(ActionEvent e){
                 System.exit(0);

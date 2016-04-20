@@ -99,11 +99,8 @@ public class DBMethods extends Database {
 			Statement stm = null;
 			ResultSet rs = null;
 			try{
-<<<<<<< HEAD
-				String sql = "SELECT * FROM " + dock_0 + " WHERE Date BETWEEN='" + firstDate + "' AND='" + secondDate + "';";
-=======
 				String sql = "SELECT * FROM " + dock_0 + " WHERE Date BETWEEN '" + firstDate + "' AND '" + secondDate + "';";
->>>>>>> origin/master
+
 				stm = con.createStatement();
 				rs = stm.executeQuery(sql);
 				while(rs.next()){

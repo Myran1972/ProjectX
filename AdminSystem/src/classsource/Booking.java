@@ -1,28 +1,34 @@
-
-
 package classsource;
 
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.*;
 import java.util.*;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 
 public class Booking extends JInternalFrame{
 
 	String availableKaj = " ";
-	
+	static String fetched_kaj = null;
 	JLabel lb1=new JLabel(availableKaj);
    	JLabel lb2=new JLabel("Shipment");
    	JLabel lb3=new JLabel("Shipment ID");
    	JTextField TF_Shipment=new JTextField(10);
    	JTextField TF_ShipmentID=new JTextField(10);
    	JButton searchBtn=new JButton("Search");
+   	JButton bookingBtn=new JButton("Book");
    	Container con=getContentPane();
+   	String bookedStatus = "booked";
    	
+	String getDateStr = null;
+	String getBookedIntervalStr = null;
+	
    	JTable table;
    	AbstractTableModel dtm;
    	
@@ -76,6 +82,10 @@ public class Booking extends JInternalFrame{
    	    searchBtn.setFont(f);
    	    getContentPane().add(searchBtn);
 
+   	    bookingBtn.setBounds(420,230,120,25);
+   	    bookingBtn.setFont(f);
+   	    getContentPane().add(bookingBtn);
+   	    
 		sl.setBounds(180,60,425,290);
 		
 		getContentPane().add(sl);
@@ -94,53 +104,83 @@ public class Booking extends JInternalFrame{
         		
 	   			System.out.println("Shipment is " + TF_Shipment.getText());
         		System.out.println("ShipmentID is " + TF_ShipmentID.getText());
-        		String fetchType_sql;
-        		String fetchKaj_sql;
+        		
         		String fetched_volType = null;
         		String fetched_kaj = null;
 	   			if(TF_Shipment.getText().isEmpty() || TF_ShipmentID.getText().isEmpty()){
 	   				new JOptionPane().showMessageDialog(null,"You must provide shipment name and ID!");
 	   			}else{
-	            	fetchType_sql = "SELECT VolumeType FROM Ships WHERE Name='" + TF_Shipment.getText() + "' AND ID='" + TF_ShipmentID.getText() + "';";
-	            	ResultSet rs = db.executeQuery(fetchType_sql);
-	            	
-	        		try{
-	        			while(rs.next()){
-	        				fetched_volType = rs.getString("VolumeType");
-	        				
-	        				
-	        			}
-	        			if(fetched_volType != null){
-	        				   //fetchKaj_sql = "SELECT Name FROM Dock WHERE VolumeType='" + fetched_volType + "';";
-	        				fetchKaj_sql = "SELECT Name FROM Dock WHERE VolumeType='" +"A005" + "';";
-
-	        				   rs = db.executeQuery(fetchKaj_sql);
-	        				   while(rs.next()){
-	        					   fetched_kaj = rs.getString("Name");
-	        					   db.closeIt(rs);
-	        					   System.out.println(fetched_kaj);
-	        				   }
-	        				   db.closeIt(rs);
-	        			 }else {
-	        				 new JOptionPane().showMessageDialog(null,"You must provide right shipment name and ID!");
-	        			 }	        			
-	        		}catch(Exception e){
-	        			System.err.println("error " + e.getMessage());
-	        			db.closeIt(rs);
-	        		}
+	   				DBMethods methods = new DBMethods();
+	   				fetched_volType = methods.getShipVol1(TF_Shipment.getText(), TF_ShipmentID.getText());
+	   				fetched_kaj = methods.getDockByVolumeType(fetched_volType);
 	   			}
 	   			lb1.setText(fetched_kaj);
-	   			/*
-	   			JLabel lb = new JLabel(volType);
-				lb.setBounds(200,50,300,30);  
-				lb.setFont(new Font("italic",Font.BOLD,24));
-				getContentPane().add(lb);*/
 	   		}});
+	
+
+		bookingBtn.addActionListener(new ActionListener(){
+	   		public void actionPerformed(ActionEvent event){
+	   			
+	   			JOptionPane optionPane = new JOptionPane("Do you want to by\n" 
+	   													+ "create a report?", 
+	   													JOptionPane.YES_NO_OPTION);
+	   			
+	   			//String insertBooking = "insert into Dock_1(Date, TimeInterval) values(" + "'2016-04-18'" + "'00-08" + "')";
+        		
+	   			String sql = "UPDATE Dock_1 SET TimeInterval='" + getBookedIntervalStr + "'" +
+						"WHERE Date='" + getDateStr + "';";
+	   			ResultSet rs = db.executeQuery(sql);
+   			
+	   		}});
+		
+		table.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+		     
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+			    if (e.getSource() == table.getSelectionModel() && table.getRowSelectionAllowed()) {
+			    	int row = table.getSelectedRow();
+			    	int col = table.getSelectedColumn();
+
+			    	
+			    		//if(table.getValueAt(row, col).toString() == "available"){
+			    			getDateStr = oneDayFrom(row);
+			    			getBookedIntervalStr = table.getColumnName(col);
+			    			
+			    			System.out.println("click på row " + oneDayFrom(row) + "   " +  getDateStr);
+					        System.out.println("click på col " + getBookedIntervalStr);
+			    		//}
+			    			
+			    	}
+			    	
+			      } 
+			/*else if (e.getSource() == table.getColumnModel().getSelectionModel()
+			          && table.getColumnSelectionAllowed()) {
+			        int first = e.getFirstIndex();
+			        int last = e.getLastIndex();
+			      }
+			      if (e.getValueIsAdjusting()) {
+			        System.out.println("");
+			      }
+			      */
+			      
+			      
+			      
+			      
+			//}
+	    });
+		
 		setSize(630,400);
 		this.setClosable(true);
 		setVisible(true);
 	}
-	
+	public static String oneDayFrom(int day){
+		final String DATE_FORMAT_NOW = "yyyy-MM-dd";
+		
+		Calendar cal = Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT_NOW);
+		cal.add(Calendar.DATE, day);
+		return sdf.format(cal.getTime());
+	}
    
 }
 		

@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class DBMethods extends Database {
-	
+	public static DBMethods methods = new DBMethods();
 	public String getDockByVolumeType(String volType){
 		if(hasConnection()){
 			Statement stm = null;
@@ -100,7 +100,7 @@ public class DBMethods extends Database {
 			ResultSet rs = null;
 			try{
 				String sql = "SELECT * FROM " + dock_0 + " WHERE Date BETWEEN='" + firstDate + "' AND='" + secondDate + "';";
-				stm = con-createStatement();
+				stm = con.createStatement();
 				rs = stm.executeQuery(sql);
 				while(rs.next()){
 					String date = rs.getString("Date");

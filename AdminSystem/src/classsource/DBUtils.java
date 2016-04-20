@@ -25,9 +25,9 @@ public class DBUtils{
            System.err.println("Could not load driver: "+cnfe.getMessage());
        }
    }
-   private static Connection con;
-   private static DBUtils instance = new DBUtils();
-   private DBUtils(){
+   public static Connection con;
+   public static DBUtils instance = new DBUtils();
+   public DBUtils(){
 	getConnection();
    }
    /**

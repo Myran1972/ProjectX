@@ -19,13 +19,21 @@ class BookingTable extends AbstractTableModel {
     
     Object[][] p = {
     		{now(), defaultStatus, defaultStatus, defaultStatus},
-    		{now(), defaultStatus, defaultStatus, defaultStatus},
-    		{now(), defaultStatus, defaultStatus, defaultStatus},
-    		{now(), defaultStatus, defaultStatus, defaultStatus},
-    		{now(), defaultStatus, defaultStatus, defaultStatus}
+    		{oneDayFrom(1), defaultStatus, defaultStatus, defaultStatus},
+    		{oneDayFrom(2), defaultStatus, defaultStatus, defaultStatus},
+    		{oneDayFrom(3), defaultStatus, defaultStatus, defaultStatus},
+    		{oneDayFrom(4), defaultStatus, defaultStatus, defaultStatus},
+    		{oneDayFrom(5), defaultStatus, defaultStatus, defaultStatus},
+    		{oneDayFrom(6), defaultStatus, defaultStatus, defaultStatus},
+    		{oneDayFrom(7), defaultStatus, defaultStatus, defaultStatus},
+    		{oneDayFrom(8), defaultStatus, defaultStatus, defaultStatus},
+    		{oneDayFrom(9), defaultStatus, defaultStatus, defaultStatus}
+    		
+    		// date('now','start of month','+1 month','-1 day');
+    		//DATETIME('NOW', '-1 dayss');
     		};
     
-    String[] columnNames = {"Date", "00:00 - 07:59", "08:00 - 16:59", "17:00 - 24:00"};
+    String[] columnNames = {"Date", "00-07", "08-16", "17-24"};
     
     public int getColumnCount() {
         return columnNames.length;
@@ -67,5 +75,17 @@ class BookingTable extends AbstractTableModel {
 		Calendar cal = Calendar.getInstance();
 		SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT_NOW);
 		return sdf.format(cal.getTime());
+	}
+	public static String oneDayFrom(int day){
+		final String DATE_FORMAT_NOW = "yyyy-MM-dd";
+		
+		Calendar cal = Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT_NOW);
+		cal.add(Calendar.DATE, day);
+		return sdf.format(cal.getTime());
+	}
+	
+	public void insertDateData(){
+		String sql = "insert into Dock_1(Date, TimeInterval) values(now())";
 	}
 }

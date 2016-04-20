@@ -30,7 +30,7 @@ public class Main extends JFrame implements Runnable{
 //--------------------------------------------------------------------------------
 
 	public Main(){
-		setTitle("Persnal and Booking management system");
+		setTitle("Personal and Booking management system");
 		Container con = getContentPane();
 		con.setLayout(new BorderLayout());
 		con.add(deskpane,BorderLayout.CENTER);

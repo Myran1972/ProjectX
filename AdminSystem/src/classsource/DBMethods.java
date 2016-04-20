@@ -9,20 +9,22 @@ import java.util.List;
 
 public class DBMethods extends Database {
 	public static DBMethods methods = new DBMethods();
-	public String getDockByVolumeType(String volType){
+	public String getDockByVolumeType(String volType){ //uppdaterad mr
 		if(hasConnection()){
 			Statement stm = null;
 			ResultSet rs = null;
 			try{
-				String sql = "SELECT * FROM Dock WHERE VolumeType='" + volType + "'";
+				//mr: String sql = "SELECT * FROM Dock WHERE VolumeType='" + volType + "'";
+				String sql = "SELECT * FROM TypeTable WHERE VolumeType='" + volType + "'";
 				stm = con.createStatement();
 				   rs = stm.executeQuery(sql);
 				   while(rs.next()){
 					   
-					   String id = rs.getString("ID");
-					   String name = rs.getString("Name");
+					   String id = rs.getString("DockID");
+					   //mr: String name = rs.getString("Name");
 					   String volumetype = rs.getString("VolumeType");
 					   //return "ID = " + id + ", Name = "+ name + ", VolumeType = "+ volumetype;
+					   String name = "Kaj "+id;
 					   return name;
 					   
 				   }
@@ -41,7 +43,7 @@ public class DBMethods extends Database {
 		return null;
 	}
 
-	public String getShipVol1(String Name, String ID){
+	public String getShipVol1(String Name, String ID){ //ingen uppdatering behövs
 		if(hasConnection()){
 			String sql = "SELECT VolumeType FROM Ships WHERE Name='" + Name + "' AND ID='" + ID + "';";
 			Statement stm = null;
@@ -68,7 +70,7 @@ public class DBMethods extends Database {
 		}
 		return null;
 	}
-	public String getOKTrucks(String shipVolume){
+	public String getOKTrucks(String shipVolume){ //ingen uppdatering behövs, men det behövs JOIN för truckstatus
 		
 		String  truck = getTruckVol(shipVolume);
 		
@@ -95,20 +97,60 @@ public class DBMethods extends Database {
 		}
 		return null;
 	}
-	public String getDock(String dock_0, String firstDate, String secondDate){
+	
+	//gör om nedan helt, nytt namn mm, se nedanför /mr
+//	public String getDock(String dock_0, String firstDate, String secondDate){ 
+//		if(hasConnection()){
+//			Statement stm = null;
+//			ResultSet rs = null;
+//			try{
+//				String sql = "SELECT * FROM " + dock_0 + " WHERE Date BETWEEN '" + firstDate + "' AND '" + secondDate + "';";
+//
+//				stm = con.createStatement();
+//				rs = stm.executeQuery(sql);
+//				while(rs.next()){
+//					String date = rs.getString("Date");
+//					String time = rs.getString("TimeInterval");
+//					String ship = rs.getString("ShipName");
+//					return "Date: " + date + " Time: " + time + " ShipName: " + ship;
+//				}
+//			}catch(SQLException sqle){
+//				System.err.println(sqle.getMessage());
+//			}finally{
+//				try{
+//					rs.close();
+//					stm.close();
+//				}catch(SQLException e){
+//					e.printStackTrace();
+//				}
+//			}
+//		}
+//		return null;
+//}
+	
+	public void getReport(String firstDate, String secondDate){ //ny pga uppdatering /mr
 		if(hasConnection()){
 			Statement stm = null;
 			ResultSet rs = null;
 			try{
-				String sql = "SELECT * FROM " + dock_0 + " WHERE Date BETWEEN '" + firstDate + "' AND '" + secondDate + "';";
-
+				String sql = "SELECT * FROM Ship_Booked WHERE Date BETWEEN '" + firstDate + "' AND '" + secondDate + "';";
 				stm = con.createStatement();
 				rs = stm.executeQuery(sql);
 				while(rs.next()){
 					String date = rs.getString("Date");
-					String time = rs.getString("TimeInterval");
 					String ship = rs.getString("ShipName");
-					return "Date: " + date + " Time: " + time + " ShipName: " + ship;
+					int shipId = rs.getInt("ShipID");					
+					int dock = rs.getInt("DockID_00");
+					String time = "00-08";
+					if(rs.wasNull()){
+						dock = rs.getInt("DockID_08");
+						time = "08-16";
+						if(rs.wasNull()){
+							dock = rs.getInt("DockID_16");
+							time = "16-00";
+						}
+					}//gjorde som Kim hade gjort först (med return), men då kan man bara få första posten, kan man returnera något bättre?
+					System.out.println("Date: " + date + " Time: " + time + " Dock: " + dock + " ShipID: " + shipId + " ShipName: " + ship);					
 				}
 			}catch(SQLException sqle){
 				System.err.println(sqle.getMessage());
@@ -121,23 +163,38 @@ public class DBMethods extends Database {
 				}
 			}
 		}
-		return null;
+		//return null;	
 	}
-	public void bookDock(String dock_0, String date, String time, String sName, int SID, int PID, String lastName, int PP, String TID, int TP){
+	
+	//mr: public void bookDock(String dock_0, String date, String time, String sName, int SID, int PID, String lastName, int PP, String TID, int TP){
+	public void bookDock(int dockId, String date, String time, String sName, int SID){ //uppdaterad mr
 		if(hasConnection()){
 			Statement stm = null;
-			ResultSet rs = null;
+			//mr: ResultSet rs = null;
+			String sql = null;
 			try{
-				String sql = "INSERT INTO " + dock_0 + " (Date, TimeInterval, ShipName, ShipID, PersonID, Lastname, PersonPrice, TruckID, TruckPrice)" + 
-				"VALUES ('"+ date +"', '"+ time +"', '" + sName + "', "+ SID +", "+ PID +", '"+ lastName +"', "+ PP +", '"+ TID +"', "+ TP+");";
+				//mr:String sql = "INSERT INTO " + dock_0 + " (Date, TimeInterval, ShipName, ShipID, PersonID, Lastname, PersonPrice, TruckID, TruckPrice)" + 
+				//"VALUES ('"+ date +"', '"+ time +"', '" + sName + "', "+ SID +", "+ PID +", '"+ lastName +"', "+ PP +", '"+ TID +"', "+ TP+");";
+				if(time.equals("00-08")){
+					sql = "INSERT INTO Ship_Booked" + " (Date, DockID_00, ShipName, ShipID)" + 
+							"VALUES ('"+ date +"', '"+ dockId +"', '" + sName + "', "+ SID +");";
+				}
+				else if(time.equals("08-16")){
+					sql = "INSERT INTO Ship_Booked" + " (Date, DockID_08, ShipName, ShipID)" + 
+							"VALUES ('"+ date +"', '"+ dockId +"', '" + sName + "', "+ SID +");";
+				}
+				else{
+					sql = "INSERT INTO Ship_Booked" + " (Date, DockID_16, ShipName, ShipID)" + 
+							"VALUES ('"+ date +"', '"+ dockId +"', '" + sName + "', "+ SID +");";
+				}
 				
 				stm = con.createStatement();
-				rs = stm.executeQuery(sql);
+				stm.executeUpdate(sql); //ändrad inget resultset eller Query vid INSERT /mr
+				
 			}catch(SQLException sqle){
 				System.err.println(sqle.getMessage());
 			}finally{
 				try{
-					rs.close();
 					stm.close();
 				}catch(SQLException e){
 					e.printStackTrace();
@@ -145,7 +202,26 @@ public class DBMethods extends Database {
 			}
 		}
 	}
-	public String getTruckVol(String volume){
+	
+	public void clearTestBookDock(int dockId, String date, String time, String sName, int SID){ // bara för att kunna återställa efter test av INSERT /mr
+		String sql = "DELETE FROM Ship_Booked WHERE ShipID = '" + SID + "'";
+		Statement stm = null;
+		try{
+			stm = con.createStatement();
+			stm.executeUpdate(sql);
+			}catch(Exception e){
+			System.err.println(e.getMessage());
+			}finally{
+				try{
+					stm.close();
+				}catch(SQLException e){
+					e.printStackTrace();
+				}
+			}
+	}
+	
+	
+	public String getTruckVol(String volume){ //näe... varför? Finns i TypeTable /mr
 		
 		switch(volume){
 			case "A005":

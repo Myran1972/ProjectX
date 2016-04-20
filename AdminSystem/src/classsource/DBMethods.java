@@ -76,7 +76,7 @@ public class DBMethods extends Database {
 			Statement stm = null;
 			ResultSet rs = null;
 			try{
-				String sql = "SELECT * FROM Trucks WHERE Type='" + truck + "' AND Status='OK' OR Status='Reserv'";
+				String sql = "SELECT * FROM Trucks WHERE Type '" + truck + "' AND Status 'OK'";
 				stm = con.createStatement();
 				rs = stm.executeQuery(sql);
 				while(rs.next()){

@@ -68,8 +68,8 @@ public class DBMethods extends Database {
 		return null;
 	}
 	public String getOKTrucks(String shipVolume){
-		String truck = shipVolume;
-		truck[shipVolume.length()] = '1';
+		
+		String  truck = getTruckVol(shipVolume);
 		
 		if(hasConnection()){
 			Statement stm = null;
@@ -99,7 +99,11 @@ public class DBMethods extends Database {
 			Statement stm = null;
 			ResultSet rs = null;
 			try{
+<<<<<<< HEAD
 				String sql = "SELECT * FROM " + dock_0 + " WHERE Date BETWEEN='" + firstDate + "' AND='" + secondDate + "';";
+=======
+				String sql = "SELECT * FROM " + dock_0 + " WHERE Date BETWEEN '" + firstDate + "' AND '" + secondDate + "';";
+>>>>>>> origin/master
 				stm = con.createStatement();
 				rs = stm.executeQuery(sql);
 				while(rs.next()){
@@ -119,6 +123,7 @@ public class DBMethods extends Database {
 				}
 			}
 		}
+		return null;
 	}
 	public void bookDock(String dock_0, String date, String time, String sName, int SID, int PID, String lastName, int PP, String TID, int TP){
 		if(hasConnection()){
@@ -141,5 +146,27 @@ public class DBMethods extends Database {
 				}
 			}
 		}
+	}
+	public String getTruckVol(String volume){
+		
+		switch(volume){
+			case "A005":
+				return "A001";
+			case "AA07":
+				return "AA01";
+			case "B005":
+				return "B001";
+			case "BB07":
+				return "BB01";
+			case "C005":
+				return "C001";
+			case "CC07":
+				return "CC01";
+			case "CCC5":
+				return "CCC1";
+			case "K007":
+				return "K001";
+		}
+		return null;
 	}
 }

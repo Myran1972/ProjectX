@@ -68,8 +68,8 @@ public class DBMethods extends Database {
 		return null;
 	}
 	public String getOKTrucks(String shipVolume){
-		String truck = shipVolume;
-		truck[shipVolume.length()] = '1';
+		
+		String  truck = getTruckVol(shipVolume);
 		
 		if(hasConnection()){
 			Statement stm = null;
@@ -142,5 +142,27 @@ public class DBMethods extends Database {
 				}
 			}
 		}
+	}
+	public String getTruckVol(String volume){
+		
+		switch(volume){
+			case "A005":
+				return "A001";
+			case "AA07":
+				return "AA01";
+			case "B005":
+				return "B001";
+			case "BB07":
+				return "BB01";
+			case "C005":
+				return "C001";
+			case "CC07":
+				return "CC01";
+			case "CCC5":
+				return "CCC1";
+			case "K007":
+				return "K001";
+		}
+		return null;
 	}
 }

@@ -43,7 +43,7 @@ public class DBMethods extends Database {
 		return null;
 	}
 
-	public String getShipVol1(String Name, String ID){ //ingen uppdatering behövs
+	public String getShipVol1(String Name, String ID){ //ingen uppdatering behï¿½vs
 		if(hasConnection()){
 			String sql = "SELECT VolumeType FROM Ships WHERE Name='" + Name + "' AND ID='" + ID + "';";
 			Statement stm = null;
@@ -70,7 +70,7 @@ public class DBMethods extends Database {
 		}
 		return null;
 	}
-	public String getOKTrucks(String shipVolume){ //ingen uppdatering behövs, men det behövs JOIN för truckstatus
+	public String getOKTrucks(String shipVolume){ //ingen uppdatering behï¿½vs, men det behï¿½vs JOIN fï¿½r truckstatus
 		
 		String  truck = getTruckVol(shipVolume);
 		
@@ -98,7 +98,7 @@ public class DBMethods extends Database {
 		return null;
 	}
 	
-	//gör om nedan helt, nytt namn mm, se nedanför /mr
+	//gï¿½r om nedan helt, nytt namn mm, se nedanfï¿½r /mr
 //	public String getDock(String dock_0, String firstDate, String secondDate){ 
 //		if(hasConnection()){
 //			Statement stm = null;
@@ -128,7 +128,7 @@ public class DBMethods extends Database {
 //		return null;
 //}
 	
-	public void getReport(String firstDate, String secondDate){ //ny pga uppdatering /mr
+	public List<String> getReport(String firstDate, String secondDate){ //ny pga uppdatering /mr
 		if(hasConnection()){
 			Statement stm = null;
 			ResultSet rs = null;
@@ -136,6 +136,7 @@ public class DBMethods extends Database {
 				String sql = "SELECT * FROM Ship_Booked WHERE Date BETWEEN '" + firstDate + "' AND '" + secondDate + "';";
 				stm = con.createStatement();
 				rs = stm.executeQuery(sql);
+				List<String> array = new ArrayList<String>();
 				while(rs.next()){
 					String date = rs.getString("Date");
 					String ship = rs.getString("ShipName");
@@ -149,9 +150,13 @@ public class DBMethods extends Database {
 							dock = rs.getInt("DockID_16");
 							time = "16-00";
 						}
-					}//gjorde som Kim hade gjort först (med return), men då kan man bara få första posten, kan man returnera något bättre?
-					System.out.println("Date: " + date + " Time: " + time + " Dock: " + dock + " ShipID: " + shipId + " ShipName: " + ship);					
+					}//gjorde som Kim hade gjort fï¿½rst (med return), men dï¿½ kan man bara fï¿½ fï¿½rsta posten, kan man returnera nï¿½got bï¿½ttre?
+					//System.out.println("Date: " + date + " Time: " + time + " Dock: " + dock + " ShipID: " + shipId + " ShipName: " + ship);
+					String test = "Date: " + date + " Time: " + time + " Dock: " + dock + " ShipID: " + shipId + " ShipName: " + ship;
+					array.add(test);	
+					
 				}
+				return array;
 			}catch(SQLException sqle){
 				System.err.println(sqle.getMessage());
 			}finally{
@@ -164,6 +169,7 @@ public class DBMethods extends Database {
 			}
 		}
 		//return null;	
+		return null;
 	}
 	
 	//mr: public void bookDock(String dock_0, String date, String time, String sName, int SID, int PID, String lastName, int PP, String TID, int TP){
@@ -189,7 +195,7 @@ public class DBMethods extends Database {
 				}
 				
 				stm = con.createStatement();
-				stm.executeUpdate(sql); //ändrad inget resultset eller Query vid INSERT /mr
+				stm.executeUpdate(sql); //ï¿½ndrad inget resultset eller Query vid INSERT /mr
 				
 			}catch(SQLException sqle){
 				System.err.println(sqle.getMessage());
@@ -203,7 +209,7 @@ public class DBMethods extends Database {
 		}
 	}
 	
-	public void clearTestBookDock(int dockId, String date, String time, String sName, int SID){ // bara för att kunna återställa efter test av INSERT /mr
+	public void clearTestBookDock(int dockId, String date, String time, String sName, int SID){ // bara fï¿½r att kunna ï¿½terstï¿½lla efter test av INSERT /mr
 		String sql = "DELETE FROM Ship_Booked WHERE ShipID = '" + SID + "'";
 		Statement stm = null;
 		try{
@@ -221,7 +227,7 @@ public class DBMethods extends Database {
 	}
 	
 	
-	public String getTruckVol(String volume){ //näe... varför? Finns i TypeTable /mr
+	public String getTruckVol(String volume){ //nï¿½e... varfï¿½r? Finns i TypeTable /mr
 		
 		switch(volume){
 			case "A005":

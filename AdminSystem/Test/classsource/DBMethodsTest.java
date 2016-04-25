@@ -44,7 +44,6 @@ public class DBMethodsTest {
 		result = dbm.getDockByVolumeType("B005");
 		System.out.println(result);
 		assertEquals(result, "Kaj 201");
-		assertNull(result, "Kaj 202");
 		result = dbm.getDockByVolumeType("B002");
 		System.out.println(result);
 		assertNull(result);			 

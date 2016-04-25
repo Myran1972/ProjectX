@@ -2,10 +2,12 @@ package classsource;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.mockito.Mockito;
+//import org.mockito.Mockito;
 
 import junit.framework.Assert;
 //import org.mockito.Mockito;
@@ -13,7 +15,7 @@ import junit.framework.Assert;
 public class DBMethodsTest {
 
 	DBMethods dbm;
-	DBMethods db_mock = Mockito.spy(DBMethods.class);
+	//DBMethods db_mock = Mockito.spy(DBMethods.class);
 	
 	@Before
 	public void setup(){
@@ -21,33 +23,33 @@ public class DBMethodsTest {
 	}
 	
 	String result;
-	
+	List<String> result1;
 	//@Test
 	//public void testGetReport() {
 	//	dbm.getReport("2016-04-20", "2016-04-20");
 	//}
 	//@Ignore //ändra Ignore mellan dessa två om du vill lägga till och se det och sen kan du ta bort
-	@Test
+	//@Test
 	public void testBookDock(){
 		dbm.bookDock(101, "2016-04-20", "08-16", "Tagpad", 153);
 	}
-	@Ignore //ändra Ignore mellan dessa två om du vill lägga till och se det och sen kan du ta bort
+	//@Ignore //ändra Ignore mellan dessa två om du vill lägga till och se det och sen kan du ta bort
 	
-	@Test
+	//@Test
 	public void testClearTestBookDock(){
 		dbm.clearTestBookDock(101, "2016-04-20", "08-16", "Tagpad", 153);
 	}
-
+	@Test
 	public void getDockByVolyme() {
 		result = dbm.getDockByVolumeType("B005");
 		System.out.println(result);
-		assertEquals(result, "ID = 2, Name = Kaj 201, VolumeType = B005");
-		assertNotEquals(result, "ID = 2, Name = Kaj 201, VolumeType = B001");
+		assertEquals(result, "Kaj 201");
+		assertNull(result, "Kaj 202");
 		result = dbm.getDockByVolumeType("B002");
 		System.out.println(result);
 		assertNull(result);			 
 		}
-		@Test
+	//@Test
 	public void getshipvol(){
 		result = dbm.getShipVol1("Talane", "1");
 		System.out.println(result);
@@ -61,36 +63,25 @@ public class DBMethodsTest {
 			
 			
 		}
-		@Test
-		public void getReport(){
-			
-			/*public void OutputStreamWriter_Closes_OutputStream_on_Close()
-			throws IOException {
-		OutputStream mock = mock(OutputStream.class);
-		OutputStreamWriter osw = new OutputStreamWriter(mock);
-		osw.close();
-		verify(mock).close();
-	}
-			 * */
-
-			//Mockito.doNothing().when(db).getReport("0000-00-00", "2016-09-13");
-			db_mock.getReport("0000-09-13", "2020-09-13");
-			assertEquals("", "");
+	//@Test
+	public void getReport(){
+		result1 = dbm.getReport("00-00-00", "2017-12-12");
+		System.out.println(result1);
 		}
 
-		@Test 
-		public void getOKTrucksSuccsses(){
-			result = dbm.getOKTrucks("A005");
-			System.out.println(result);
+	//@Test 
+	public void getOKTrucksSuccsses(){
+		result = dbm.getOKTrucks("A005");
+		System.out.println(result);
 			//assertEquals("1", result);
-		} 
+	} 
 		//@Test //Skall testa denna på wtt annat sätt
 		//public void getOKTrucksFailed(){
 		//result = dbm.getOKTrucks("AA05");
 		//System.out.println(result);
 		//assertEquals(, result);
 		//}
-		@Test
+		//@Test
 		public void getvol(){
 			result = dbm.getTruckVol("A005");
 			System.out.println(result);

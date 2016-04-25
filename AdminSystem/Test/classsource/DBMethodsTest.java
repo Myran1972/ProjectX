@@ -62,14 +62,8 @@ public class DBMethodsTest {
 			
 			
 		}
-	//@Test
-	public void getReport(){
-		result1 = dbm.getReport("00-00-00", "2017-12-12");
-		System.out.println(result1);
-		}
-
 	//@Test 
-	public void getOKTrucksSuccsses(){
+	public void getOKTrucks(){
 		result = dbm.getOKTrucks("A005");
 		System.out.println(result);
 			//assertEquals("1", result);

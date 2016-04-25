@@ -230,6 +230,40 @@ public class DBMethods extends Database {
 				}
 			}
 	}
+	public void addPeps(){
+		
+	}
+	public String getPeps(String ID, String LastName){
+		
+		if(hasConnection()){
+			Statement stm = null;
+			ResultSet rs = null;
+			try{
+				String sql = "SELECT * FROM Staff WHERE ID='"+ ID +"' AND Lastname='"+ LastName + "';";
+				stm = con.createStatement();
+				rs = stm.executeQuery(sql);
+				while(rs.next()){
+					String PID = rs.getString("ID");
+					String Name = rs.getString("Name");
+					String LName = rs.getString("LastName");
+					String License = rs.getString("License");
+					String Schedule = rs.getString("Schedule");
+					String Status = rs.getString("Status");
+					return "ID: " + PID + "Name: " + Name + "LastName: " + LName + "License: " + License + "Schedule: " + Schedule + "Status: " + Status; 
+				}
+			}catch(SQLException sqle){
+				System.err.println(sqle.getMessage());
+			}finally{
+				try{
+					rs.close();
+					stm.close();
+				}catch(SQLException e){
+					e.printStackTrace();
+				}
+			}
+		}
+		return null;
+	}
 	
 	
 	public String getTruckVol(String volume){ //n�e... varf�r? Finns i TypeTable /mr

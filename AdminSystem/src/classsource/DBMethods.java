@@ -78,11 +78,14 @@ public class DBMethods extends Database {
 			Statement stm = null;
 			ResultSet rs = null;
 			try{
-				String sql = "SELECT * FROM Trucks WHERE Type '" + truck + "' AND Status 'OK'";
+				String sql = "SELECT * FROM Trucks WHERE Type='" + truck + "' AND Status='OK'";
 				stm = con.createStatement();
 				rs = stm.executeQuery(sql);
 				while(rs.next()){
-					return rs.getString("ID");
+					int id = rs.getInt("ID");
+					String type = rs.getString("Type");
+					String status = rs.getString("Status");
+					return "ID:" + id + " Type:" + type + " Status:" + status;
 				}
 			}catch(SQLException sqle){
 				System.err.println(sqle.getMessage());
@@ -128,7 +131,7 @@ public class DBMethods extends Database {
 //		return null;
 //}
 	
-	public void getReport(String firstDate, String secondDate){ //ny pga uppdatering /mr
+	public String getReport(String firstDate, String secondDate){ //ny pga uppdatering /mr
 		if(hasConnection()){
 			Statement stm = null;
 			ResultSet rs = null;
@@ -150,7 +153,7 @@ public class DBMethods extends Database {
 							time = "16-00";
 						}
 					}//gjorde som Kim hade gjort först (med return), men då kan man bara få första posten, kan man returnera något bättre?
-					System.out.println("Date: " + date + " Time: " + time + " Dock: " + dock + " ShipID: " + shipId + " ShipName: " + ship);					
+					return "Date: " + date + " Time: " + time + " Dock: " + dock + " ShipID: " + shipId + " ShipName: " + ship;					
 				}
 			}catch(SQLException sqle){
 				System.err.println(sqle.getMessage());
@@ -163,7 +166,7 @@ public class DBMethods extends Database {
 				}
 			}
 		}
-		//return null;	
+		return null;	
 	}
 	
 	//mr: public void bookDock(String dock_0, String date, String time, String sName, int SID, int PID, String lastName, int PP, String TID, int TP){

@@ -159,8 +159,9 @@ public class DBMethods extends Database {
 					//System.out.println("Date: " + date + " Time: " + time + " Dock: " + dock + " ShipID: " + shipId + " ShipName: " + ship);
 					String test = "Date: " + date + " Time: " + time + " Dock: " + dock + " ShipID: " + shipId + " ShipName: " + ship;
 					array.add(test);	
-				return array;
+				
 				}
+				return array;
 			}catch(SQLException sqle){
 				System.err.println(sqle.getMessage());
 			}finally{

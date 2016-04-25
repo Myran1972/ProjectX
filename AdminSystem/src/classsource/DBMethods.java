@@ -230,8 +230,26 @@ public class DBMethods extends Database {
 				}
 			}
 	}
-	public void addPeps(){
-		
+	public void addPeps(String name, String lastName, String license, String schedule, String status){
+		if(hasConnection()){
+			Statement stm = null;
+			ResultSet rs = null;
+			try{
+				String sql = "INSERT INTO Staff (Name, LastName, License, Schedule, Status)"
+						   + "VALUES ('"+ name +"', '"+ lastName  +"', '"+ license +"', '"+ schedule +"', '"+ status +"');";
+			stm = con.createStatement();
+			stm.executeUpdate(sql);
+			}catch(SQLException sqle){
+				System.err.println(sqle.getMessage());
+			}finally{
+				try{
+					rs.close();
+					stm.close();
+				}catch(SQLException e){
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 	public String getPeps(String ID, String LastName){
 		
@@ -249,7 +267,7 @@ public class DBMethods extends Database {
 					String License = rs.getString("License");
 					String Schedule = rs.getString("Schedule");
 					String Status = rs.getString("Status");
-					return "ID: " + PID + "Name: " + Name + "LastName: " + LName + "License: " + License + "Schedule: " + Schedule + "Status: " + Status; 
+					return "ID: " + PID + " Name: " + Name + " LastName: " + LName + " License: " + License + " Schedule: " + Schedule + " Status: " + Status; 
 				}
 			}catch(SQLException sqle){
 				System.err.println(sqle.getMessage());

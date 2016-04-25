@@ -130,12 +130,9 @@ public class DBMethods extends Database {
 //		}
 //		return null;
 //}
-	
-<<<<<<< HEAD
-	public String getReport(String firstDate, String secondDate){ //ny pga uppdatering /mr
-=======
+
 	public List<String> getReport(String firstDate, String secondDate){ //ny pga uppdatering /mr
->>>>>>> origin/master
+
 		if(hasConnection()){
 			Statement stm = null;
 			ResultSet rs = null;
@@ -157,18 +154,13 @@ public class DBMethods extends Database {
 							dock = rs.getInt("DockID_16");
 							time = "16-00";
 						}
-<<<<<<< HEAD
-					}//gjorde som Kim hade gjort först (med return), men då kan man bara få första posten, kan man returnera något bättre?
-					return "Date: " + date + " Time: " + time + " Dock: " + dock + " ShipID: " + shipId + " ShipName: " + ship;					
-=======
+
 					}//gjorde som Kim hade gjort fï¿½rst (med return), men dï¿½ kan man bara fï¿½ fï¿½rsta posten, kan man returnera nï¿½got bï¿½ttre?
 					//System.out.println("Date: " + date + " Time: " + time + " Dock: " + dock + " ShipID: " + shipId + " ShipName: " + ship);
 					String test = "Date: " + date + " Time: " + time + " Dock: " + dock + " ShipID: " + shipId + " ShipName: " + ship;
 					array.add(test);	
-					
->>>>>>> origin/master
-				}
 				return array;
+				}
 			}catch(SQLException sqle){
 				System.err.println(sqle.getMessage());
 			}finally{
@@ -180,12 +172,9 @@ public class DBMethods extends Database {
 				}
 			}
 		}
-<<<<<<< HEAD
+
 		return null;	
-=======
-		//return null;	
-		return null;
->>>>>>> origin/master
+
 	}
 	
 	//mr: public void bookDock(String dock_0, String date, String time, String sName, int SID, int PID, String lastName, int PP, String TID, int TP){

@@ -23,7 +23,7 @@ public class DBMethodsTest {
 	//	dbm.getReport("2016-04-20", "2016-04-20");
 	//}
 	//@Ignore //ändra Ignore mellan dessa två om du vill lägga till och se det och sen kan du ta bort
-	//@Test
+	@Test
 	public void testBookDock(){
 		dbm.bookDock(101, "2016-04-20", "08-16", "Tagpad", 153);
 	}
@@ -32,7 +32,7 @@ public class DBMethodsTest {
 	public void testClearTestBookDock(){
 		dbm.clearTestBookDock(101, "2016-04-20", "08-16", "Tagpad", 153);
 	}
-	@Test
+	//@Test
 	public void getDockByVolyme() {
 		result = dbm.getDockByVolumeType("B005");
 		System.out.println(result);
@@ -50,10 +50,10 @@ public class DBMethodsTest {
 		assertEquals("A005", result);
 		result = dbm.getShipVol1("", "");
 		System.out.println(result);
-		assertEquals(null, result);
+		assertNull(result);
 		result = dbm.getShipVol1("Talane", "");
 		System.out.println(result);
-		assertEquals(null, result);
+		assertNull(result);
 			
 			
 		}
@@ -62,12 +62,18 @@ public class DBMethodsTest {
 			dbm.getReport("00-00-00", "2017-09-13");
 			//System.out.println(result);
 		}
-		//@Test 
-		public void getOKTrucksSuccsses(){
-			result = dbm.getOKTrucks("K007");
+		//@Test
+		public void getvol(){
+			result = dbm.getTruckVol("A005");
 			System.out.println(result);
-			//assertEquals("1", result);
+			assertEquals(result, "A001");
 		}
+		//@Test 
+		//public void getOKTrucksSuccsses(){
+		//	result = dbm.getOKTrucks("A005");
+		//	System.out.println(result);
+			//assertEquals("1", result);
+		//}
 		//@Test //Skall testa denna på annat sätt
 		//public void getOKTrucksFailed(){
 		//result = dbm.getOKTrucks("AA05");
@@ -75,10 +81,7 @@ public class DBMethodsTest {
 		//assertEquals(, result);
 		//}
 		//@Test
-		public void getvol(){
-			result = dbm.getTruckVol("A005");
-			System.out.println(result);
-		}
+		
 
 
 	}

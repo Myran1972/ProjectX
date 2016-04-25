@@ -2,6 +2,8 @@ package classsource;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -17,13 +19,14 @@ public class DBMethodsTest {
 	}
 	
 	String result;
+	List<String> result1;
 	
 	//@Test
 	//public void testGetReport() {
 	//	dbm.getReport("2016-04-20", "2016-04-20");
 	//}
 	//@Ignore //ändra Ignore mellan dessa två om du vill lägga till och se det och sen kan du ta bort
-	@Test
+	//@Test
 	public void testBookDock(){
 		dbm.bookDock(101, "2016-04-20", "08-16", "Tagpad", 153);
 	}
@@ -32,7 +35,7 @@ public class DBMethodsTest {
 	public void testClearTestBookDock(){
 		dbm.clearTestBookDock(101, "2016-04-20", "08-16", "Tagpad", 153);
 	}
-	//@Test
+	@Test
 	public void getDockByVolyme() {
 		result = dbm.getDockByVolumeType("B005");
 		System.out.println(result);
@@ -59,8 +62,8 @@ public class DBMethodsTest {
 		}
 		//@Test
 		public void getReport(){
-			dbm.getReport("00-00-00", "2017-09-13");
-			//System.out.println(result);
+			result1 = dbm.getReport("00-00-00", "2017-09-13");
+			System.out.println(result);
 		}
 		//@Test
 		public void getvol(){

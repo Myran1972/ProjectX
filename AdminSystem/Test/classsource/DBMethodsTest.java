@@ -39,7 +39,7 @@ public class DBMethodsTest {
 	public void testClearTestBookDock(){
 		dbm.clearTestBookDock(101, "2016-04-20", "08-16", "Tagpad", 153);
 	}
-	@Test
+	//@Test
 	public void getDockByVolyme() {
 		result = dbm.getDockByVolumeType("B005");
 		System.out.println(result);
@@ -74,12 +74,17 @@ public class DBMethodsTest {
 		//System.out.println(result);
 		//assertEquals(, result);
 		//}
-		//@Test
-		public void getvol(){
-			result = dbm.getTruckVol("A005");
-			System.out.println(result);
-		}
+	//@Test
+	public void getvol(){
+		result = dbm.getTruckVol("A005");
+		System.out.println(result);
 	}
+	@Test
+	public void TestgetPeps(){
+		result = dbm.getPeps("208", "Hudson");
+		System.out.println(result);
+	}
+}
 
 
 

@@ -16,14 +16,14 @@ public class Booking extends JInternalFrame{
 
 	String availableKaj = " ";
 	static String fetched_kaj = null;
-	JLabel lb1=new JLabel(availableKaj);
-   	JLabel lb2=new JLabel("Shipment");
-   	JLabel lb3=new JLabel("Shipment ID");
-   	JTextField TF_Shipment=new JTextField(10);
-   	JTextField TF_ShipmentID=new JTextField(10);
-   	JButton searchBtn=new JButton("Search");
-   	JButton bookingBtn=new JButton("Book");
-   	Container con=getContentPane();
+	JLabel lb1 = new JLabel(availableKaj);
+   	JLabel lb2 = new JLabel("Shipment");
+   	JLabel lb3 = new JLabel("Shipment ID");
+   	JTextField TF_Shipment = new JTextField(10);
+   	JTextField TF_ShipmentID = new JTextField(10);
+   	JButton searchBtn = new JButton("Search");
+   	JButton bookingBtn = new JButton("Book");
+   	Container con = getContentPane();
    	String bookedStatus = "booked";
    	
 	String getDateStr = null;
@@ -33,8 +33,7 @@ public class Booking extends JInternalFrame{
    	AbstractTableModel dtm;
    	
 	public Booking(){
-		DBUtils db = DBUtils.getInstance();
-		System.out.println("Booking ");
+		//DBUtils db = DBUtils.getInstance();
 		setTitle("Booking for Shipment");	
 		
 		dtm = new BookingTable();
@@ -95,9 +94,7 @@ public class Booking extends JInternalFrame{
 		TF_ShipmentID.setBorder(BorderFactory.createLineBorder(Color.black));
    	    searchBtn.setBorder(BorderFactory.createRaisedBevelBorder());
 		sl.setBorder(BorderFactory.createLineBorder(Color.black));
-
 		
-		//Database.joinDB();
 		
 		searchBtn.addActionListener(new ActionListener(){
 	   		public void actionPerformed(ActionEvent event){
@@ -125,13 +122,7 @@ public class Booking extends JInternalFrame{
 	   				    "Would you like to print booking report?",
 	   				    "Print report",
 	   				    JOptionPane.YES_NO_OPTION);
-	   			//String insertBooking = "insert into Dock_1(Date, TimeInterval) values(" + "'2016-04-18'" + "'00-08" + "')";
-        		
-	   			//String sql = "UPDATE Dock_1 SET TimeInterval='" + getBookedIntervalStr + "'" +
-						//"WHERE Date='" + getDateStr + "';";
-	   			//ResultSet rs = db.executeQuery(sql);
-   			
-	   		}});
+   		}});
 		
 		table.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
 		     
@@ -141,32 +132,13 @@ public class Booking extends JInternalFrame{
 			    	int row = table.getSelectedRow();
 			    	int col = table.getSelectedColumn();
 
-			    	
-			    		//if(table.getValueAt(row, col).toString() == "available"){
 			    			getDateStr = oneDayFrom(row);
 			    			getBookedIntervalStr = table.getColumnName(col);
-			    			
-			    			System.out.println("click på row " + oneDayFrom(row) + "   " +  getDateStr);
-					        System.out.println("click på col " + getBookedIntervalStr);
-			    		//}
 			    			
 			    	}
 			    	
 			      } 
-			/*else if (e.getSource() == table.getColumnModel().getSelectionModel()
-			          && table.getColumnSelectionAllowed()) {
-			        int first = e.getFirstIndex();
-			        int last = e.getLastIndex();
-			      }
-			      if (e.getValueIsAdjusting()) {
-			        System.out.println("");
-			      }
-			      */
-			      
-			      
-			      
-			      
-			//}
+
 	    });
 		
 		setSize(630,400);

@@ -11,7 +11,7 @@ public class Main extends JFrame implements Runnable{
 	Thread t=new Thread(this);
 	JDesktopPane deskpane = new JDesktopPane();
 	JPanel p = new JPanel();
-	Label lp1=new Label("Logistics West");
+	Label lp1=new Label("Logistics West ");
 
 //--------------------------------------------------------------------------
    	ImageIcon icon1=new ImageIcon("image//tjsc.gif");
@@ -27,6 +27,7 @@ public class Main extends JFrame implements Runnable{
 	ImageIcon icon12=new ImageIcon("image//bz.gif");
 	ImageIcon icon13=new ImageIcon("image//gy.gif");
 	ImageIcon icon14=new ImageIcon("image//glxx.gif");
+	ImageIcon icon15=new ImageIcon("image//report.png");
 //--------------------------------------------------------------------------------
 
 	public Main(){
@@ -67,7 +68,7 @@ public class Main extends JFrame implements Runnable{
 		//---------------------------------------------------------------------------
         password.addActionListener(new ActionListener(){
         	public void actionPerformed(ActionEvent e){
-        		deskpane.add(new AmendPasswordV());
+        		deskpane.add(new ChangePasswordV());
         		}
         	});
 
@@ -100,24 +101,34 @@ public class Main extends JFrame implements Runnable{
 
         employeeM.addActionListener(new ActionListener(){
         	public void actionPerformed(ActionEvent e){
-        		deskpane.add(new Employeemanage());
+        		deskpane.add(new EmployeeManage());
         		}
         	});
 
 
 //-----------------------------------------------------------------------------------------------
 		
-		JMenuItem departmentS = new JMenuItem("Booking");
-		departmentS.setFont(f);
+		JMenuItem sub_BookingMenuItem = new JMenuItem("Booking");
+		sub_BookingMenuItem.setFont(f);
 		
-		selectM.add(departmentS);
+		selectM.add(sub_BookingMenuItem);
 		
-		departmentS.addActionListener(new ActionListener(){
+		sub_BookingMenuItem.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){				
 				deskpane.add(new Booking());
 				}
 			});
-
+		JMenuItem sub_BookingReport = new JMenuItem("Print report");
+		sub_BookingReport.setFont(f);
+		
+		selectM.add(sub_BookingReport);
+		
+		sub_BookingReport.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){				
+				deskpane.add(new BookingReport());
+				}
+			});
+		sub_BookingReport.setIcon(icon15);
 
 		JMenuItem help = new JMenuItem("Help");
 		help.setFont(f);
@@ -152,7 +163,7 @@ public class Main extends JFrame implements Runnable{
 		land.setIcon(icon2);
 		password.setIcon(icon3);
 		exit.setIcon(icon4);
-		departmentS.setIcon(icon11);
+		sub_BookingMenuItem.setIcon(icon11);
 		help.setIcon(icon6);
 		aboutM.setIcon(icon13);
 		about.setIcon(icon13);
@@ -163,9 +174,9 @@ public class Main extends JFrame implements Runnable{
    	    JToolBar jToolBar1 = new JToolBar();//create a tool menu
    	    jToolBar1.setLayout(new GridLayout(9,1));
         JButton TB_EmployeeBasicInfo = new JButton();
-        TB_EmployeeBasicInfo.setToolTipText("Employee basic info management");
+        TB_EmployeeBasicInfo.setToolTipText("Employee info management");
         JButton TB_EmployeeBasicInfoSearch = new JButton();
-        TB_EmployeeBasicInfoSearch.setToolTipText("Employee basic info search ");
+        TB_EmployeeBasicInfoSearch.setToolTipText("Employee info search ");
         JButton TB_ChangePwd = new JButton();
         TB_ChangePwd.setToolTipText("Change password");
         
@@ -174,6 +185,7 @@ public class Main extends JFrame implements Runnable{
         
         JButton TB_BookingReport = new JButton();
         TB_BookingReport.setToolTipText("Booking Report");
+        
         
         JButton TB_Exit = new JButton();
         TB_Exit.setToolTipText("Exit system");
@@ -187,7 +199,7 @@ public class Main extends JFrame implements Runnable{
         TB_EmployeeBasicInfo.addActionListener(new ActionListener(){
         	public void actionPerformed(ActionEvent e){
         		
-        		deskpane.add(new Employeemanage());
+        		deskpane.add(new EmployeeManage());
         		}
         	});
         jToolBar1.add(TB_EmployeeBasicInfo);
@@ -203,7 +215,7 @@ public class Main extends JFrame implements Runnable{
         TB_ChangePwd.setIcon(new ImageIcon("image//3.png"));
         TB_ChangePwd.addActionListener(new ActionListener(){
         	public void actionPerformed(ActionEvent e){
-        		deskpane.add(new AmendPasswordV());
+        		deskpane.add(new ChangePasswordV());
         		}
         	});
         jToolBar1.add(TB_ChangePwd);
@@ -219,7 +231,7 @@ public class Main extends JFrame implements Runnable{
         	});
         jToolBar1.add(TB_Booking);
 
-        TB_BookingReport.setIcon(new ImageIcon("image//7.jpg"));
+        TB_BookingReport.setIcon(new ImageIcon("image//7.png"));
         TB_BookingReport.addActionListener(new ActionListener(){
         	public void actionPerformed(ActionEvent e){
         		

@@ -43,7 +43,7 @@ public class DBMethods extends Database {
 		return null;
 	}
 
-	public String getShipVol1(String Name, String ID){ //ingen uppdatering beh�vs
+	public String getShipVol1(String Name, int ID){ //ingen uppdatering beh�vs
 		if(hasConnection()){
 			String sql = "SELECT VolumeType FROM Ships WHERE Name='" + Name + "' AND ID='" + ID + "';";
 			Statement stm = null;
@@ -158,8 +158,7 @@ public class DBMethods extends Database {
 					}//gjorde som Kim hade gjort f�rst (med return), men d� kan man bara f� f�rsta posten, kan man returnera n�got b�ttre?
 					//System.out.println("Date: " + date + " Time: " + time + " Dock: " + dock + " ShipID: " + shipId + " ShipName: " + ship);
 					String test = "Date: " + date + " Time: " + time + " Dock: " + dock + " ShipID: " + shipId + " ShipName: " + ship;
-					array.add(test);	
-				
+					array.add(test);
 				}
 				return array;
 			}catch(SQLException sqle){
@@ -252,6 +251,28 @@ public class DBMethods extends Database {
 			}
 		}
 	}
+	public void removePeps(){
+		if(hasConnection()){
+			Statement stm = null;
+			ResultSet rs = null;
+			try{
+				String sql = " "; //DO more shit here kim you lazy ball
+			stm = con.createStatement();
+			stm.executeUpdate(sql);
+			}catch(SQLException sqle){
+				
+				System.err.println(sqle.getMessage());
+			}finally{
+				try{
+					rs.close();
+					stm.close();
+				}catch(SQLException e){
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	
 	public String getPeps(String ID, String LastName){
 		
 		if(hasConnection()){

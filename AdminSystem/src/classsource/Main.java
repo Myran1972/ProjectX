@@ -66,7 +66,24 @@ public class Main extends JFrame implements Runnable{
 		systemM.add(exit);
 		
 		//---------------------------------------------------------------------------
-        
+        password.addActionListener(new ActionListener(){
+        	public void actionPerformed(ActionEvent e){
+        		deskpane.add(new ChangePasswordV());
+        		}
+        	});
+
+        land.addActionListener(new ActionListener(){
+        	public void actionPerformed(ActionEvent e){
+        		setVisible(false);
+        		new Land();
+        		}
+        	});
+
+        addDelete.addActionListener(new ActionListener(){
+        	public void actionPerformed(ActionEvent e){
+        		deskpane.add(new AddDeleteUser());
+        		}
+        	});
 
         exit.addActionListener(new ActionListener(){
         	public void actionPerformed(ActionEvent e){
@@ -160,7 +177,9 @@ public class Main extends JFrame implements Runnable{
         TB_EmployeeBasicInfo.setToolTipText("Employee info management");
         JButton TB_EmployeeBasicInfoSearch = new JButton();
         TB_EmployeeBasicInfoSearch.setToolTipText("Employee info search ");
-
+        JButton TB_ChangePwd = new JButton();
+        TB_ChangePwd.setToolTipText("Change password");
+        
         JButton TB_Booking = new JButton();
         TB_Booking.setToolTipText("Booking");
         
@@ -192,6 +211,16 @@ public class Main extends JFrame implements Runnable{
         		}
         	});
         jToolBar1.add(TB_EmployeeBasicInfoSearch);
+
+        TB_ChangePwd.setIcon(new ImageIcon("image//3.png"));
+        TB_ChangePwd.addActionListener(new ActionListener(){
+        	public void actionPerformed(ActionEvent e){
+        		deskpane.add(new ChangePasswordV());
+        		}
+        	});
+        jToolBar1.add(TB_ChangePwd);
+
+
 
         TB_Booking.setIcon(new ImageIcon("image//5.jpg"));
         TB_Booking.addActionListener(new ActionListener(){

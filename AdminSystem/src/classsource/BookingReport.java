@@ -78,8 +78,14 @@ class BookingReportPanel extends JPanel{
 	   			BookingReportTable table = new BookingReportTable();
 	   			
 	   			DBMethods method = new DBMethods();
-	   			method.getReport(TF_FromDate.getText(), TF_ToDate.getText());
-				//table.printBookingReport(rs);
+	   			try {
+					rs = method.getDock(TF_FromDate.getText(), TF_ToDate.getText());
+					table.printBookingReport(rs);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+					//method.getReport(TF_FromDate.getText(), TF_ToDate.getText());
 				
 
 	   			BookingReportTable frame = new BookingReportTable();

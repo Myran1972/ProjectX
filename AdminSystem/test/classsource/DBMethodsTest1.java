@@ -34,7 +34,7 @@ public class DBMethodsTest1 {
 	}
 	
 	@Test
-	public void testBookDock(){
+	public void testClearTestBookDock(){
 		
 	}
 	

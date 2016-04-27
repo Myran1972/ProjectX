@@ -9,7 +9,8 @@ import java.util.List;
 
 public class DBMethods extends Database {
 	public static DBMethods methods = new DBMethods();
-	public int getDockByVolumeType(String volType){ //uppdaterad mr
+	
+	public Integer getDockByVolumeType(String volType){ //uppdaterad mr
 		if(hasConnection()){
 			Statement stm = null;
 			ResultSet rs = null;
@@ -38,10 +39,9 @@ public class DBMethods extends Database {
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
-			   }
-			
+			}
 		}
-		return null;
+	return null;
 	}
 
 	public String getShipVol1(String Name, int ID){ //ingen uppdatering beh�vs

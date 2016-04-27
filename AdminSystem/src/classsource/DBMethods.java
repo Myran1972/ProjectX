@@ -9,7 +9,7 @@ import java.util.List;
 
 public class DBMethods extends Database {
 	public static DBMethods methods = new DBMethods();
-	public String getDockByVolumeType(String volType){ //uppdaterad mr
+	public int getDockByVolumeType(String volType){ //uppdaterad mr
 		if(hasConnection()){
 			Statement stm = null;
 			ResultSet rs = null;
@@ -19,14 +19,15 @@ public class DBMethods extends Database {
 				stm = con.createStatement();
 				   rs = stm.executeQuery(sql);
 				   while(rs.next()){
-					   
+					   /*
 					   String id = rs.getString("DockID");
 					   //mr: String name = rs.getString("Name");
 					   String volumetype = rs.getString("VolumeType");
 					   //return "ID = " + id + ", Name = "+ name + ", VolumeType = "+ volumetype;
 					   String name = "Kaj "+id;
 					   return name;
-					   
+					   */
+					   return rs.getInt("DockID");
 				   }
 			   }catch(SQLException sqle){
 				   System.err.println(sqle.getMessage());

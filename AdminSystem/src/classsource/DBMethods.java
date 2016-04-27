@@ -252,12 +252,12 @@ public class DBMethods extends Database {
 			}
 		}
 	}
-	public void removePeps(){
+	public void removePeps(int PID, String lNAme){
 		if(hasConnection()){
 			Statement stm = null;
 			ResultSet rs = null;
 			try{
-				String sql = " "; //DO more shit here kim you lazy ball
+				String sql = "DELETE FROM Staff WHERE ID='"+ PID +"' AND LastName='"+ lName+"';";
 			stm = con.createStatement();
 			stm.executeUpdate(sql);
 			}catch(SQLException sqle){

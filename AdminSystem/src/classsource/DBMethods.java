@@ -306,12 +306,12 @@ public class DBMethods extends Database {
 		return null;
 	}
 	
-	public void addTrucks(){
+	public void addTrucks(String type, String status){
 		if(hasConnection()){
 			Statement stm = null;
 			ResultSet rs = null;
 			try{
-				String sql = ""; 
+				String sql = "INSERT INTO Trucks (Type, Status) VALUES ('"+ type +"', '"+ status +"');"; 
 			stm = con.createStatement();
 			stm.executeUpdate(sql);
 			}catch(SQLException sqle){
@@ -327,12 +327,12 @@ public class DBMethods extends Database {
 			}
 		}
 	}
-	public void removeTrucks(){
+	public void removeTrucks(String ID, String Type){
 		if(hasConnection()){
 			Statement stm = null;
 			ResultSet rs = null;
 			try{
-				String sql = ""; //Stuff goes here
+				String sql = "DELETE FROM Trucks WHERE ID='"+ ID +"' AND Type='"+ Type +"';";
 			stm = con.createStatement();
 			stm.executeUpdate(sql);
 			}catch(SQLException sqle){
@@ -348,10 +348,6 @@ public class DBMethods extends Database {
 			}
 		}
 	}
-	public void getTrucks(){
-		
-	}
-	
 	
 	public String getTruckVol(String volume){ //n�e... varf�r? Finns i TypeTable /mr
 		

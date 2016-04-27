@@ -252,12 +252,12 @@ public class DBMethods extends Database {
 			}
 		}
 	}
-	public void removePeps(int PID, String lNAme){
+	public void removePeps(int PID, String lastName){
 		if(hasConnection()){
 			Statement stm = null;
 			ResultSet rs = null;
 			try{
-				String sql = "DELETE FROM Staff WHERE ID='"+ PID +"' AND LastName='"+ lName+"';";
+				String sql = "DELETE FROM Staff WHERE ID='"+ PID +"' AND LastName='"+ lastName +"';";
 			stm = con.createStatement();
 			stm.executeUpdate(sql);
 			}catch(SQLException sqle){
@@ -304,6 +304,52 @@ public class DBMethods extends Database {
 			}
 		}
 		return null;
+	}
+	
+	public void addTrucks(){
+		if(hasConnection()){
+			Statement stm = null;
+			ResultSet rs = null;
+			try{
+				String sql = ""; 
+			stm = con.createStatement();
+			stm.executeUpdate(sql);
+			}catch(SQLException sqle){
+				
+				System.err.println(sqle.getMessage());
+			}finally{
+				try{
+					rs.close();
+					stm.close();
+				}catch(SQLException e){
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	public void removeTrucks(){
+		if(hasConnection()){
+			Statement stm = null;
+			ResultSet rs = null;
+			try{
+				String sql = ""; //Stuff goes here
+			stm = con.createStatement();
+			stm.executeUpdate(sql);
+			}catch(SQLException sqle){
+				
+				System.err.println(sqle.getMessage());
+			}finally{
+				try{
+					rs.close();
+					stm.close();
+				}catch(SQLException e){
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	public void getTrucks(){
+		
 	}
 	
 	

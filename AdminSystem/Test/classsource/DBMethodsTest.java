@@ -30,15 +30,8 @@ public class DBMethodsTest {
 	//}
 	//@Ignore //ändra Ignore mellan dessa två om du vill lägga till och se det och sen kan du ta bort
 	//@Test
-	public void testBookDock(){
-		dbm.bookDock(101, "2016-04-20", "08-16", "Tagpad", 153);
-	}
 	//@Ignore //ändra Ignore mellan dessa två om du vill lägga till och se det och sen kan du ta bort
 	
-	//@Test
-	public void testClearTestBookDock(){
-		dbm.clearTestBookDock(101, "2016-04-20", "08-16", "Tagpad", 153);
-	}
 	//@Test
 	public void getDockByVolyme() {
 		result = dbm.getDockByVolumeType("B005");

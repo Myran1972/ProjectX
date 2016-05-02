@@ -9,7 +9,8 @@ import java.util.List;
 
 public class DBMethods extends Database {
 	public static DBMethods methods = new DBMethods();
-	public String getDockByVolumeType(String volType){ //uppdaterad mr
+	
+	public Integer getDockByVolumeType(String volType){ //uppdaterad mr
 		if(hasConnection()){
 			Statement stm = null;
 			ResultSet rs = null;
@@ -19,14 +20,15 @@ public class DBMethods extends Database {
 				stm = con.createStatement();
 				   rs = stm.executeQuery(sql);
 				   while(rs.next()){
-					   
+					   /*
 					   String id = rs.getString("DockID");
 					   //mr: String name = rs.getString("Name");
 					   String volumetype = rs.getString("VolumeType");
 					   //return "ID = " + id + ", Name = "+ name + ", VolumeType = "+ volumetype;
 					   String name = "Kaj "+id;
 					   return name;
-					   
+					   */
+					   return rs.getInt("DockID");
 				   }
 			   }catch(SQLException sqle){
 				   System.err.println(sqle.getMessage());
@@ -37,13 +39,12 @@ public class DBMethods extends Database {
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
-			   }
-			
+			}
 		}
-		return null;
+	return null;
 	}
 
-	public String getShipVol1(String Name, String ID){ //ingen uppdatering beh�vs
+	public String getShipVol1(String Name, int ID){ //ingen uppdatering beh�vs
 		if(hasConnection()){
 			String sql = "SELECT VolumeType FROM Ships WHERE Name='" + Name + "' AND ID='" + ID + "';";
 			Statement stm = null;
@@ -161,8 +162,7 @@ public class DBMethods extends Database {
 					}//gjorde som Kim hade gjort f�rst (med return), men d� kan man bara f� f�rsta posten, kan man returnera n�got b�ttre?
 					//System.out.println("Date: " + date + " Time: " + time + " Dock: " + dock + " ShipID: " + shipId + " ShipName: " + ship);
 					String test = "Date: " + date + " Time: " + time + " Dock: " + dock + " ShipID: " + shipId + " ShipName: " + ship;
-					array.add(test);	
-				
+					array.add(test);
 				}
 				return array;
 			}catch(SQLException sqle){
@@ -237,7 +237,6 @@ public class DBMethods extends Database {
 	public void addPeps(String name, String lastName, String license, String schedule, String status){
 		if(hasConnection()){
 			Statement stm = null;
-			ResultSet rs = null;
 			try{
 				String sql = "INSERT INTO Staff (Name, LastName, License, Schedule, Status)"
 						   + "VALUES ('"+ name +"', '"+ lastName  +"', '"+ license +"', '"+ schedule +"', '"+ status +"');";
@@ -247,7 +246,6 @@ public class DBMethods extends Database {
 				System.err.println(sqle.getMessage());
 			}finally{
 				try{
-					rs.close();
 					stm.close();
 				}catch(SQLException e){
 					e.printStackTrace();
@@ -255,7 +253,6 @@ public class DBMethods extends Database {
 			}
 		}
 	}
-<<<<<<< HEAD
 	public void removePeps(String ID, String lastName){
 		if(hasConnection()){
 			Statement stm = null;
@@ -276,8 +273,6 @@ public class DBMethods extends Database {
 		}
 	}
 	
-=======
->>>>>>> 7560fba62bc05025320ea24e3793eadb2fd8e469
 	public String getPeps(String ID, String LastName){
 		
 		if(hasConnection()){
@@ -310,6 +305,79 @@ public class DBMethods extends Database {
 		return null;
 	}
 	
+	public void addTrucks(String type, String status){
+		if(hasConnection()){
+			Statement stm = null;
+			try{
+				String sql = "INSERT INTO Trucks (Type, Status) VALUES ('"+ type +"', '"+ status +"');"; 
+			stm = con.createStatement();
+			stm.executeUpdate(sql);
+			}catch(SQLException sqle){
+				
+				System.err.println(sqle.getMessage());
+			}finally{
+				try{
+					stm.close();
+				}catch(SQLException e){
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	public void removeTrucks(String ID, String Type){
+		if(hasConnection()){
+			Statement stm = null;
+			try{
+				String sql = "DELETE FROM Trucks WHERE ID='"+ ID +"' AND Type='"+ Type +"';";
+				stm = con.createStatement();
+				stm.executeUpdate(sql);
+			}catch(SQLException sqle){
+				System.err.println(sqle.getMessage());
+			}finally{
+				try{
+					stm.close();
+				}catch(SQLException e){
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	public void removeShip(String ID, String name, String comp){
+		if(hasConnection()){
+			Statement stm = null;
+			try{
+				String sql = "DELETE FROM Ships WHERE ID='"+ ID +"' AND Name='"+ name +" AND Company='"+ comp +"';";
+				stm = con.createStatement();
+				stm.executeQuery(sql);
+			}catch(SQLException sqle){
+				System.err.println(sqle.getMessage());
+			}finally{
+				try{
+					stm.close();
+				}catch(SQLException e){
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	public void addShip(String name, String comp, String volType){
+		if(hasConnection()){
+			Statement stm = null;
+			try{
+				String sql = "INSERT INTO Ships (Name, Company, VolumeType) VALUES ('"+ name +"', '"+ comp +"', '"+ volType +"');";
+				stm = con.createStatement();
+				stm.executeQuery(sql);
+			}catch(SQLException sqle){
+				System.err.print(sqle.getMessage());
+			}finally{
+				try{
+					stm.close();
+				}catch(SQLException e){
+					e.printStackTrace();
+				}
+			}
+		}
+	}
 	
 	public String getTruckVol(String volume){ //n�e... varf�r? Finns i TypeTable /mr
 		

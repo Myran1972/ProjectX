@@ -86,28 +86,28 @@ public class DBMethodsTest {
 		System.out.println(result2);
 		assertEquals(result2, "ID: 304 Name: Petra LastName: Floren License: K Schedule: S Status: 50%");
 	}
-	/** Väntar på att metoderna ska bli klara.
-	//@Test
+	// Väntar på att metoderna ska bli klara.
+	@Test
 	public void TestAddPeps(){
-		result2 = dbm.addPeps("Honey", "Booboo", "A001", "S", "100%");
-		System.out.println(result2);
+		dbm.addPeps("Honey", "Booboo", "A", "S", "100%");
+		//System.out.println(result2);
 	}
 	//@Test
-	public void TestRemovePeps(){
-		result2 = dbm.removePeps(305, "Booboo");
-		System.out.println(result2);
-	}
+	//public void TestRemovePeps(){
+		//result2 = dbm.removePeps(305, "Booboo");
+		//System.out.println(result2);
+	//}
 	//@Test
-	public void TestAddTrucks(){
-		result2 = dbm.addTrucks("A001", "OK");;
-		System.out.println(result2);
-	}
+	//public void TestAddTrucks(){
+		//result2 = dbm.addTrucks("A001", "OK");;
+		//System.out.println(result2);
+	//}
 	//@Test
-	public void TestRemoveTrucks(){
-		result2 = dbm.removeTrucks(288, "A001");
-		System.out.println(result2);
-	}
-	**/
+	//public void TestRemoveTrucks(){
+		//result2 = dbm.removeTrucks(288, "A001");
+		//System.out.println(result2);
+	//}
+	
 }
 
 

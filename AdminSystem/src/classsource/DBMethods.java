@@ -71,7 +71,7 @@ public class DBMethods extends Database {
 		}
 		return null;
 	}
-	public String getOKTrucks(String shipVolume){ //ingen uppdatering beh�vs, men det beh�vs JOIN f�r truckstatus
+	public List<String> getOKTrucks(String shipVolume){ //ingen uppdatering beh�vs, men det beh�vs JOIN f�r truckstatus
 		
 		String  truck = getTruckVol(shipVolume);
 		
@@ -82,12 +82,15 @@ public class DBMethods extends Database {
 				String sql = "SELECT * FROM Trucks WHERE Type='" + truck + "' AND Status='OK'";
 				stm = con.createStatement();
 				rs = stm.executeQuery(sql);
+				List<String> array = new ArrayList<String>();
 				while(rs.next()){
 					int id = rs.getInt("ID");
 					String type = rs.getString("Type");
 					String status = rs.getString("Status");
-					return "ID:" + id + " Type:" + type + " Status:" + status;
+					String line = "ID:" + id + " Type:" + type + " Status:" + status;
+					array.add(line);
 				}
+				return array;
 			}catch(SQLException sqle){
 				System.err.println(sqle.getMessage());
 			}finally{
@@ -250,11 +253,11 @@ public class DBMethods extends Database {
 			}
 		}
 	}
-	public void removePeps(int PID, String lastName){
+	public void removePeps(String ID, String lastName){
 		if(hasConnection()){
 			Statement stm = null;
 			try{
-				String sql = "DELETE FROM Staff WHERE ID='"+ PID +"' AND LastName='"+ lastName +"';";
+				String sql = "DELETE FROM Staff WHERE ID='"+ ID +"' AND LastName='"+ lastName +"';";
 			stm = con.createStatement();
 			stm.executeUpdate(sql);
 			}catch(SQLException sqle){

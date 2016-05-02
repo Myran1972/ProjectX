@@ -1,6 +1,4 @@
-
 package classsource;
-
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -8,26 +6,27 @@ import java.sql.*;
 
 public class Main extends JFrame implements Runnable{
 
-	Thread t=new Thread(this);
+	Thread t = new Thread(this);
 	JDesktopPane deskpane = new JDesktopPane();
 	JPanel p = new JPanel();
-	Label lp1=new Label("Logistics West ");
+	Label lp1 = new Label("Logistics West ");
 
 //--------------------------------------------------------------------------
-   	ImageIcon icon1=new ImageIcon("image//tjsc.gif");
-	ImageIcon icon2=new ImageIcon("image//cxdl.gif");
-	ImageIcon icon3=new ImageIcon("image//xgmm.gif");
-	ImageIcon icon4=new ImageIcon("image//tcxt.gif");
-	ImageIcon icon6=new ImageIcon("image//help.gif");
-	ImageIcon icon7=new ImageIcon("image//cx.png");
-	ImageIcon icon8=new ImageIcon("image//gl.gif");
-	ImageIcon icon9=new ImageIcon("image//xt.gif");
-	ImageIcon icon10=new ImageIcon("image//xxgl.gif");
+   	ImageIcon icon1 = new ImageIcon("image//tjsc.gif");
+	ImageIcon icon2 = new ImageIcon("image//cxdl.gif");
+	ImageIcon icon3 = new ImageIcon("image//xgmm.gif");
+	ImageIcon icon4 = new ImageIcon("image//tcxt.gif");
+	ImageIcon icon6 = new ImageIcon("image//help.gif");
+	ImageIcon icon7 = new ImageIcon("image//cx.png");
+	ImageIcon icon8 = new ImageIcon("image//gl.gif");
+	ImageIcon icon9 = new ImageIcon("image//xt.gif");
+	ImageIcon icon10 = new ImageIcon("image//xxgl.gif");
 	ImageIcon icon11=new ImageIcon("image//xxcx.gif");
 	ImageIcon icon12=new ImageIcon("image//bz.gif");
 	ImageIcon icon13=new ImageIcon("image//gy.gif");
 	ImageIcon icon14=new ImageIcon("image//glxx.gif");
-	ImageIcon icon15=new ImageIcon("image//report.png");
+	ImageIcon icon15=new ImageIcon("image//7mini.png");
+	ImageIcon icon16=new ImageIcon("image//2mini.png");
 //--------------------------------------------------------------------------------
 
 	public Main(){
@@ -66,24 +65,6 @@ public class Main extends JFrame implements Runnable{
 		systemM.add(exit);
 		
 		//---------------------------------------------------------------------------
-        password.addActionListener(new ActionListener(){
-        	public void actionPerformed(ActionEvent e){
-        		deskpane.add(new ChangePasswordV());
-        		}
-        	});
-
-        land.addActionListener(new ActionListener(){
-        	public void actionPerformed(ActionEvent e){
-        		setVisible(false);
-        		new Land();
-        		}
-        	});
-
-        addDelete.addActionListener(new ActionListener(){
-        	public void actionPerformed(ActionEvent e){
-        		deskpane.add(new AddDeleteUser());
-        		}
-        	});
 
         exit.addActionListener(new ActionListener(){
         	public void actionPerformed(ActionEvent e){
@@ -101,11 +82,28 @@ public class Main extends JFrame implements Runnable{
 
         employeeM.addActionListener(new ActionListener(){
         	public void actionPerformed(ActionEvent e){
-        		deskpane.add(new EmployeeManage());
+        		try {
+					deskpane.add(new EmployeeManagement());
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
         		}
         	});
 
 
+		JMenuItem employeeSearch = new JMenuItem("Search Employee");
+		employeeSearch.setFont(f);
+		
+		manageM.add(employeeSearch);
+
+		employeeSearch.addActionListener(new ActionListener(){
+        	public void actionPerformed(ActionEvent e){
+        		deskpane.add(new EmployeeSearch());
+        		}
+        	});
+
+        
 //-----------------------------------------------------------------------------------------------
 		
 		JMenuItem sub_BookingMenuItem = new JMenuItem("Booking");
@@ -128,22 +126,23 @@ public class Main extends JFrame implements Runnable{
 				deskpane.add(new BookingReport());
 				}
 			});
+		
 		sub_BookingReport.setIcon(icon15);
-
+		
 		JMenuItem help = new JMenuItem("Help");
 		help.setFont(f);
 		JMenuItem about =new JMenuItem("About");
 		about.setFont(f);
 		aboutM.add(about);
 
-//------------------------------------------------------------------------
+/*------------------------------------------------------------------------
 		about.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				deskpane.add(new About());
 				}
 			});
-//-----------------------------------------------------------------------------------------
-
+-----------------------------------------------------------------------------------------
+*/
 		mb.add(systemM);
 		mb.add(manageM);
 		mb.add(selectM);
@@ -169,7 +168,7 @@ public class Main extends JFrame implements Runnable{
 		about.setIcon(icon13);
 
 		employeeM.setIcon(icon14);
-		
+		employeeSearch.setIcon(icon16);
 		
    	    JToolBar jToolBar1 = new JToolBar();//create a tool menu
    	    jToolBar1.setLayout(new GridLayout(9,1));
@@ -199,7 +198,12 @@ public class Main extends JFrame implements Runnable{
         TB_EmployeeBasicInfo.addActionListener(new ActionListener(){
         	public void actionPerformed(ActionEvent e){
         		
-        		deskpane.add(new EmployeeManage());
+        		try {
+					deskpane.add(new EmployeeManagement());
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
         		}
         	});
         jToolBar1.add(TB_EmployeeBasicInfo);
@@ -207,18 +211,12 @@ public class Main extends JFrame implements Runnable{
         TB_EmployeeBasicInfoSearch.setIcon(new ImageIcon("image//2.png"));
         TB_EmployeeBasicInfoSearch.addActionListener(new ActionListener(){
         	public void actionPerformed(ActionEvent e){
-        		deskpane.add(new BIQ());
+        		deskpane.add(new EmployeeSearch());
         		}
         	});
         jToolBar1.add(TB_EmployeeBasicInfoSearch);
 
-        TB_ChangePwd.setIcon(new ImageIcon("image//3.png"));
-        TB_ChangePwd.addActionListener(new ActionListener(){
-        	public void actionPerformed(ActionEvent e){
-        		deskpane.add(new ChangePasswordV());
-        		}
-        	});
-        jToolBar1.add(TB_ChangePwd);
+
 
 
 

@@ -4,10 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 
-//http://diyland.biz/index.php?opt=detail&topic=67&id=11433
 
-
-class BookingTable extends AbstractTableModel {
+public class BookingTable extends AbstractTableModel {
 
     String defaultStatus = "available";
     String bookedStatus = "booked";
@@ -80,7 +78,5 @@ class BookingTable extends AbstractTableModel {
 		return sdf.format(cal.getTime());
 	}
 	
-	public void insertDateData(){
-		String sql = "insert into Dock_1(Date, TimeInterval) values(now())";
-	}
-}
+	
+}ss

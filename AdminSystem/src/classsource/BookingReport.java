@@ -1,38 +1,24 @@
 package classsource;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Container;
-import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Vector;
-
-import javax.swing.BorderFactory;
-import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableModel;
+
 
 public class BookingReport extends JInternalFrame {
 
 	JLabel lb_print = new JLabel("Print Booking Report");
    	//Container con = getContentPane();
    	JPanel p = new JPanel();	
+   	Container contentPane;
    	public BookingReport(){
    		setTitle("Print booking report");	
    		p.add(lb_print);
@@ -44,6 +30,7 @@ public class BookingReport extends JInternalFrame {
    	    setBounds(100, 100, 280, 260);
    	    this.setClosable(true);
    	    setVisible(true);
+   	   // setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
    	}
    
 }  	
@@ -75,27 +62,31 @@ class BookingReportPanel extends JPanel{
 		printBtn.addActionListener(new ActionListener(){
 	   		public void actionPerformed(ActionEvent event){
 	   			ResultSet rs;
-	   			BookingReportTable table = new BookingReportTable();
 	   			
 	   			DBMethods method = new DBMethods();
+	   			//rs = method.getRep(TF_FromDate.getText(), TF_ToDate.getText());
+	   			
+	   			if(rs == null){
+	   				System.out.println("null is rs");
+	   			}
+				
+				
+	   			DisplayTable frame = new DisplayTable();
+	   			frame.setSize(800,600);
 	   			try {
-					rs = method.getDock(TF_FromDate.getText(), TF_ToDate.getText());
-					table.printBookingReport(rs);
+					frame.showWholeTable(rs);
+					rs.close();
+					
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
+					
 					e.printStackTrace();
 				}
-					//method.getReport(TF_FromDate.getText(), TF_ToDate.getText());
-				
-
-	   			BookingReportTable frame = new BookingReportTable();
-	   	        //frame.setDefaultCloseOperation( EXIT_ON_CLOSE );
-	   	        frame.pack();
 	   	        frame.setVisible(true);
+	   	        
 	   		}
 	   		});
 	
-
+		
 	   	}
 
 	

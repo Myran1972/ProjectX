@@ -8,6 +8,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.*;
+
 import java.util.*;
 import java.sql.*;
 import java.text.SimpleDateFormat;
@@ -103,25 +104,21 @@ public class Booking extends JInternalFrame{
         		System.out.println("ShipmentID is " + TF_ShipmentID.getText());
         		
         		String fetched_volType = null;
-        		String fetched_kaj = null;
+        		int fetched_kaj = 0;
 	   			if(TF_Shipment.getText().isEmpty() || TF_ShipmentID.getText().isEmpty()){
 	   				new JOptionPane().showMessageDialog(null,"You must provide shipment name and ID!");
 	   			}else{
 	   				DBMethods methods = new DBMethods();
-	   				fetched_volType = methods.getShipVol1(TF_Shipment.getText(), TF_ShipmentID.getText());
+	   				fetched_volType = methods.getShipVol1(TF_Shipment.getText(), Integer.parseInt(TF_ShipmentID.getText()));
 	   				fetched_kaj = methods.getDockByVolumeType(fetched_volType);
 	   			}
-	   			lb1.setText(fetched_kaj);
+	   			lb1.setText(String.valueOf(fetched_kaj));
 	   		}});
 	
 
 		bookingBtn.addActionListener(new ActionListener(){
 	   		public void actionPerformed(ActionEvent event){
-	   			int n = JOptionPane.showConfirmDialog(
-	   				    null,
-	   				    "Would you like to print booking report?",
-	   				    "Print report",
-	   				    JOptionPane.YES_NO_OPTION);
+
    		}});
 		
 		table.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
@@ -129,12 +126,20 @@ public class Booking extends JInternalFrame{
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 			    if (e.getSource() == table.getSelectionModel() && table.getRowSelectionAllowed()) {
+			    	
+			    	DBMethods methods = new DBMethods();
 			    	int row = table.getSelectedRow();
 			    	int col = table.getSelectedColumn();
 
-			    			getDateStr = oneDayFrom(row);
-			    			getBookedIntervalStr = table.getColumnName(col);
-			    			
+			    	getDateStr = oneDayFrom(row);
+			    	getBookedIntervalStr = table.getColumnName(col);
+			    	System.out.println(getDateStr);
+			    	System.out.println(getBookedIntervalStr);
+			    	System.out.println(TF_Shipment.getText());
+			    	System.out.println(Integer.parseInt(TF_ShipmentID.getText()));
+			    	int dockId = 101;
+			    	methods.bookDock( dockId, getDateStr, getBookedIntervalStr, 
+			    			TF_Shipment.getText(), Integer.parseInt(TF_ShipmentID.getText()));			    			
 			    	}
 			    	
 			      } 
@@ -155,4 +160,4 @@ public class Booking extends JInternalFrame{
 	}
    
 }
-		
+			

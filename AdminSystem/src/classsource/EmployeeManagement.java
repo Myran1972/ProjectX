@@ -1,80 +1,95 @@
 package classsource;
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
-
-import java.awt.event.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
+import javax.swing.table.*;
+import java.util.*;
 import java.sql.*;
 
+import javax.swing.table.TableColumn;
+
+import javax.swing.table.AbstractTableModel;
+
+
 public class EmployeeManagement extends JInternalFrame{
-
-    	String schema[]={"MF", "LS", "S"};
-    	String Status[]={"100%", "50%", "Sjuk", "VAB", "Studier", "Semester"};
-    	String license[]={"A" ,"AA", "B", "BB", "C", "CC", "CCC", "K"};
-    	
-        JButton save_btn = new JButton("save");
-        JButton exit_btn = new JButton("exit");
-        JButton append_btn = new JButton("add");
-        JButton delete_btn= new JButton("delete");
-        JButton change_btn = new JButton("change");
-        
-       	JTable table;
-       	AbstractTableModel dtm;
-
-    public EmployeeManagement() {
-
-    	setTitle("Employee basic info");
-		dtm = new EmployeeTable();
-    	//dtm = new BookingTable();
-    	table = new JTable(dtm);
-
-        JScrollPane sl = new JScrollPane(table);
-        getContentPane().setLayout(null);
-
-        
-		String defaultStatus = "available";
-		String bookedStatus = "booked";
-		JComboBox c1 = new JComboBox();
-		c1.addItem(defaultStatus);
-		c1.addItem(bookedStatus);
-		JComboBox c2 = new JComboBox();
-		c2.addItem(defaultStatus);
-		c2.addItem(bookedStatus);
-		JComboBox c3 = new JComboBox();
-		c3.addItem(defaultStatus);
-		c3.addItem(bookedStatus);
-		       
-		table.getColumnModel().getColumn(3).setCellEditor(new DefaultCellEditor(c1));    
-		table.getColumnModel().getColumn(4).setCellEditor(new DefaultCellEditor(c2));    
-		table.getColumnModel().getColumn(5).setCellEditor(new DefaultCellEditor(c3));   
-        
-        
-        Font f=new Font("italic",Font.PLAIN,12);
-        //save_btn.setFont(f);
-
-        getContentPane().add(save_btn);
-        save_btn.setBounds(210, 390, 70, 25);
-       
-        getContentPane().add(exit_btn);
-        exit_btn.setBounds(410, 390, 70,25);
-
-        getContentPane().add(append_btn);
-        append_btn.setBounds(110, 390, 70, 25);
-
-        getContentPane().add(delete_btn);
-        delete_btn.setBounds(310, 390, 70, 25);
-
-        getContentPane().add(change_btn);
-        change_btn.setBounds(20, 390, 80, 25);
-        
-		sl.setBounds(20,60,425,290);
-		getContentPane().add(sl);
-     
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-558)/2, (screenSize.height-477)/2, 558, 455);
-        this.setClosable(true);
-        this.setMaximizable(true);
-        setVisible(true);
-    }
+		EmployeeManagement() throws SQLException{
+			JTable table;
+			EmployeeTable dtm;
+   		    
+   			
+   			ResultSet rs;
+   			//JPanel pane =  new JPanel(new GridLayout());
+   			JPanel pane =  new JPanel();
+   			JFrame frame = null;
+   			JButton clean_btn = null, add_btn = null, save_btn = null;
+   			frame = new JFrame("Employee Management");
+   			pane = new JPanel();
+   			clean_btn = new JButton("Clean Data");
+   			clean_btn.addActionListener(new ActionListener() {
+   		   public void actionPerformed(ActionEvent e) {
+   		    //removeData();
+   		   }
+   		  });
+   		  add_btn = new JButton("Add Data");
+   		  add_btn.addActionListener(new ActionListener() {
+   		   public void actionPerformed(ActionEvent e) {
+   		    //addData();
+   		   }
+   		  });
+   		  save_btn = new JButton("Save");
+   		  save_btn.addActionListener(new ActionListener() {
+   		   public void actionPerformed(ActionEvent e) {
+   		    //saveData();
+   		   }
+   		  });
+   		  	DBMethods methods = new DBMethods();
+   			//rs = methods.getAllPeps();
+   			
+   			if(rs == null){
+   				System.out.println("null is rs");
+   			}
+   			dtm = new EmployeeTable(rs);
+   			table = new JTable(dtm);
+   			
+   			String[] status ={"100%","50%", "Sjuk", "VAB", "Studier", "Semester"}; 
+   			String[] schedule = {"MF", "LS", "S"};
+   			String[] license = {"A", "AA", "B", "BB","C", "CC", "CCC", "K"};
+   			
+   			JComboBox comboStatus = new JComboBox (status);
+   			//comboStatus.setEditable(true);
+   			JComboBox comboSchedule = new JComboBox (schedule);
+   			//comboSchedule.setEditable(true);
+   			JComboBox comboLicense = new JComboBox (license);
+   			//comboLicense.setEditable(true);
+   			
+   			table.getColumnModel().getColumn(3).setCellEditor(new DefaultCellEditor(comboLicense));    
+   			table.getColumnModel().getColumn(4).setCellEditor(new DefaultCellEditor(comboStatus));    
+   			table.getColumnModel().getColumn(5).setCellEditor(new DefaultCellEditor(comboSchedule));   
+   			
+   			
+   			table.setBounds(100, 100, 580, 260);
+   			pane.add((new JScrollPane(dtm.getWholeTable(rs))), BorderLayout.CENTER);
+   			pane.add(add_btn, BorderLayout.WEST);
+	   		pane.add(save_btn, BorderLayout.CENTER);
+	   		  
+	   		pane.add(clean_btn, BorderLayout.EAST);
+	   		
+			frame.add(pane);
+   			frame.setSize(800,600);
+   			frame.pack();
+   	        frame.setVisible(true);
+   	        rs.close();
+   	     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+   		}
 }

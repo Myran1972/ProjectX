@@ -234,7 +234,6 @@ public class DBMethods extends Database {
 	public void addPeps(String name, String lastName, String license, String schedule, String status){
 		if(hasConnection()){
 			Statement stm = null;
-			ResultSet rs = null;
 			try{
 				String sql = "INSERT INTO Staff (Name, LastName, License, Schedule, Status)"
 						   + "VALUES ('"+ name +"', '"+ lastName  +"', '"+ license +"', '"+ schedule +"', '"+ status +"');";
@@ -244,7 +243,6 @@ public class DBMethods extends Database {
 				System.err.println(sqle.getMessage());
 			}finally{
 				try{
-					rs.close();
 					stm.close();
 				}catch(SQLException e){
 					e.printStackTrace();
@@ -255,7 +253,6 @@ public class DBMethods extends Database {
 	public void removePeps(int PID, String lastName){
 		if(hasConnection()){
 			Statement stm = null;
-			ResultSet rs = null;
 			try{
 				String sql = "DELETE FROM Staff WHERE ID='"+ PID +"' AND LastName='"+ lastName +"';";
 			stm = con.createStatement();
@@ -265,7 +262,6 @@ public class DBMethods extends Database {
 				System.err.println(sqle.getMessage());
 			}finally{
 				try{
-					rs.close();
 					stm.close();
 				}catch(SQLException e){
 					e.printStackTrace();
@@ -309,7 +305,6 @@ public class DBMethods extends Database {
 	public void addTrucks(String type, String status){
 		if(hasConnection()){
 			Statement stm = null;
-			ResultSet rs = null;
 			try{
 				String sql = "INSERT INTO Trucks (Type, Status) VALUES ('"+ type +"', '"+ status +"');"; 
 			stm = con.createStatement();
@@ -319,7 +314,6 @@ public class DBMethods extends Database {
 				System.err.println(sqle.getMessage());
 			}finally{
 				try{
-					rs.close();
 					stm.close();
 				}catch(SQLException e){
 					e.printStackTrace();
@@ -330,17 +324,50 @@ public class DBMethods extends Database {
 	public void removeTrucks(String ID, String Type){
 		if(hasConnection()){
 			Statement stm = null;
-			ResultSet rs = null;
 			try{
 				String sql = "DELETE FROM Trucks WHERE ID='"+ ID +"' AND Type='"+ Type +"';";
-			stm = con.createStatement();
-			stm.executeUpdate(sql);
+				stm = con.createStatement();
+				stm.executeUpdate(sql);
 			}catch(SQLException sqle){
-				
 				System.err.println(sqle.getMessage());
 			}finally{
 				try{
-					rs.close();
+					stm.close();
+				}catch(SQLException e){
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	public void removeShip(){
+		if(hasConnection()){
+			Statement stm = null;
+			try{
+				String sql = " wrods";
+				stm = con.createStatement();
+				stm.executeQuery(sql);
+			}catch(SQLException sqle){
+				System.err.println(sqle.getMessage());
+			}finally{
+				try{
+					stm.close();
+				}catch(SQLException e){
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	public void addShip(String name, String comp, String volType){
+		if(hasConnection()){
+			Statement stm = null;
+			try{
+				String sql = "INSERT INTO Ships (Name, Company, VolumeType) VALUES ('"+ name +"', '"+ comp +"', '"+ volType +"');";
+				stm = con.createStatement();
+				stm.executeQuery(sql);
+			}catch(SQLException sqle){
+				System.err.print(sqle.getMessage());
+			}finally{
+				try{
 					stm.close();
 				}catch(SQLException e){
 					e.printStackTrace();

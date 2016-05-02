@@ -348,7 +348,7 @@ public class DBMethods extends Database {
 			try{
 				String sql = "DELETE FROM Ships WHERE ID='"+ ID +"' AND Name='"+ name +" AND Company='"+ comp +"';";
 				stm = con.createStatement();
-				stm.executeQuery(sql);
+				stm.executeUpdate(sql);
 			}catch(SQLException sqle){
 				System.err.println(sqle.getMessage());
 			}finally{
@@ -366,7 +366,7 @@ public class DBMethods extends Database {
 			try{
 				String sql = "INSERT INTO Ships (Name, Company, VolumeType) VALUES ('"+ name +"', '"+ comp +"', '"+ volType +"');";
 				stm = con.createStatement();
-				stm.executeQuery(sql);
+				stm.executeUpdate(sql);
 			}catch(SQLException sqle){
 				System.err.print(sqle.getMessage());
 			}finally{

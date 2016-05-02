@@ -58,7 +58,7 @@ public class DBMethodsTest {
 		}
 	//@Test 
 	public void getOKTrucks(){
-		result2 = dbm.getOKTrucks("A005");
+		dbm.getOKTrucks("A005");
 		System.out.println(result);
 			//assertEquals("1", result);
 	} 
@@ -86,7 +86,7 @@ public class DBMethodsTest {
 		//System.out.println(result2);
 	}
 	//@Test
-<<<<<<< HEAD
+
 	//public void TestRemovePeps(){
 		//result2 = dbm.removePeps(305, "Booboo");
 		//System.out.println(result2);
@@ -102,14 +102,14 @@ public class DBMethodsTest {
 		//System.out.println(result2);
 	//}
 	
-=======
+
 	public void TestRemovePeps(){
-		result2 = dbm.removePeps(305, "Booboo");
+		//result2 = dbm.removePeps(305, "Booboo");
 		System.out.println(result2);
 	}
 	
-	**/
->>>>>>> 7560fba62bc05025320ea24e3793eadb2fd8e469
+
+
 }
 
 

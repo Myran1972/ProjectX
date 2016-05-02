@@ -22,8 +22,9 @@ public class DBMethodsTest {
 		dbm = new DBMethods();		
 	}
 	
-	String result;
+	Integer result;
 	List<String> result1;
+	String result2;
 	//@Test
 	//public void testGetReport() {
 	//	dbm.getReport("2016-04-20", "2016-04-20");
@@ -43,28 +44,28 @@ public class DBMethodsTest {
 	public void getDockByVolyme() {
 		result = dbm.getDockByVolumeType("B005");
 		System.out.println(result);
-		assertEquals(result, "Kaj 201");
+		assertEquals(result, (Integer) 201);
 		result = dbm.getDockByVolumeType("B002");
 		System.out.println(result);
 		assertNull(result);			 
 		}
 	//@Test
 	public void getshipvol(){
-		result = dbm.getShipVol1("Talane", "1");
-		System.out.println(result);
-		assertEquals("A005", result);
-		result = dbm.getShipVol1("", "");
-		System.out.println(result);
-		assertEquals(null, result);
-		result = dbm.getShipVol1("Talane", "");
-		System.out.println(result);
-		assertEquals(null, result);
-			
-			
+		result2 = dbm.getShipVol1("Talane", 1);
+		System.out.println(result2);
+		assertEquals("A005", result2);
+		/**
+		result2 = dbm.getShipVol1("", (Integer) null);
+		System.out.println(result2);
+		assertEquals(null, result2);
+		result2 = dbm.getShipVol1("Talane", (Integer) "");
+		System.out.println(result2);
+		assertEquals(null, result2);
+		**/
 		}
 	//@Test 
 	public void getOKTrucks(){
-		result = dbm.getOKTrucks("A005");
+		result2 = dbm.getOKTrucks("A005");
 		System.out.println(result);
 			//assertEquals("1", result);
 	} 
@@ -76,14 +77,37 @@ public class DBMethodsTest {
 		//}
 	//@Test
 	public void getvol(){
-		result = dbm.getTruckVol("A005");
+		result2 = dbm.getTruckVol("A005");
 		System.out.println(result);
 	}
-	@Test
-	public void TestgetPeps(){
-		result = dbm.getPeps("208", "Hudson");
-		System.out.println(result);
+	//@Test
+	public void TestGetPeps(){
+		result2 = dbm.getPeps("304", "Floren");
+		System.out.println(result2);
+		assertEquals(result2, "ID: 304 Name: Petra LastName: Floren License: K Schedule: S Status: 50%");
 	}
+	/** Väntar på att metoderna ska bli klara.
+	//@Test
+	public void TestAddPeps(){
+		result2 = dbm.addPeps("Honey", "Booboo", "A001", "S", "100%");
+		System.out.println(result2);
+	}
+	//@Test
+	public void TestRemovePeps(){
+		result2 = dbm.removePeps(305, "Booboo");
+		System.out.println(result2);
+	}
+	//@Test
+	public void TestAddTrucks(){
+		result2 = dbm.addTrucks("A001", "OK");;
+		System.out.println(result2);
+	}
+	//@Test
+	public void TestRemoveTrucks(){
+		result2 = dbm.removeTrucks(288, "A001");
+		System.out.println(result2);
+	}
+	**/
 }
 
 

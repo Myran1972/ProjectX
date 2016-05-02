@@ -62,6 +62,7 @@ public class MainNonGUI {
 				
 				break;
 			case 4: //trucks
+				sc.nextLine();
 				option = "Trucks";
 				do{
 					subMenu(option);
@@ -93,36 +94,10 @@ public class MainNonGUI {
 				break;
 				
 			case 5: //ships
+				sc.nextLine();
 				option = "Ships";
-				do{
-					subMenu(option);
-					subChoice = sc.nextInt();
-					sc.nextLine();
-					switch(subChoice){
-					
-					case 1: 
-						searchShip();
-						break;
-						
-					case 2: //add
-						addShip();
-						break;
-						
-					case 3: //remove
-						removeShip();
-						break;
-						
-					case 4: //return
-						break;
-						
-					default:
-						System.out.println("Wrong choice! Try again!");
-					break;
-					}
-					
-				}while(subChoice!=4);
-				break;
 				
+				break;
 			case 6:
 				System.out.println("Thank you and Good bye!");
 				break;
@@ -254,29 +229,15 @@ public class MainNonGUI {
 	}
 	
 	public static void searchShip(){
-		System.out.println("This option doesn't exist yet, please come back later!");
+		
 	}
 	
 	public static void addShip(){
-		System.out.println("Enter ship name");
-		String name = sc.nextLine();
-		System.out.println("Enter company name");
-		String company = sc.nextLine();
-		System.out.println("Enter volume type");
-		String volType = sc.nextLine();
-		dbm.addShip(name, company, volType);
-		System.out.println("Ship added!");
+		
 	}
 	
 	public static void removeShip(){
-		System.out.println("Enter ship ID");
-		String name = sc.nextLine();
-		System.out.println("Enter ship name");
-		String ID = sc.nextLine();
-		System.out.println("Enter company name");
-		String company = sc.nextLine();
-		dbm.removeShip(ID, name, company);
-		System.out.println("Ship removed!");
+		
 	}
 }
 

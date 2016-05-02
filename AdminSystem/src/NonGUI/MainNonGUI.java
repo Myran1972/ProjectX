@@ -181,9 +181,9 @@ public class MainNonGUI {
 	}
 	
 	public static void addStaff(){
-		System.out.println("Enter name");
+		System.out.println("Enter first name");
 		String name = sc.nextLine();
-		System.out.println("Enter lastname");
+		System.out.println("Enter last name");
 		String familyName = sc.nextLine();
 		System.out.println("Enter license type");
 		String license = sc.nextLine();
@@ -192,10 +192,6 @@ public class MainNonGUI {
 		System.out.println("Enter status");
 		String status = sc.nextLine();
 		dbm.addPeps(name, familyName, license, schedule, status); 
-//		Exception in thread "main" java.lang.NullPointerException
-//		at classsource.DBMethods.addPeps(DBMethods.java:247)
-//		at NonGUI.MainNonGUI.main(MainNonGUI.java:88)
-		//använd inte resultset vid insert, tror det är det, onödigt oavsett
 		System.out.println("Staff added!");
 	}
 	
@@ -221,17 +217,12 @@ public class MainNonGUI {
 		System.out.println("Enter status");
 		String status = sc.nextLine();
 		dbm.addTrucks(type, status);
-//		Exception in thread "main" java.lang.NullPointerException
-//		at classsource.DBMethods.addTrucks(DBMethods.java:322)
-//		at NonGUI.MainNonGUI.main(MainNonGUI.java:137)
-		//använd inte resultset vid insert, tror det är det, onödigt oavsett
 		System.out.println("Truck added!");
 	}
 	
 	public static void removeTrucks(){
 		System.out.println("Enter ID");
 		String ID = sc.nextLine();
-		sc.nextLine(); // ska vi ha String?
 		System.out.println("Enter type");
 		String truckType = sc.nextLine();
 		dbm.removeTrucks(ID, truckType);

@@ -346,7 +346,7 @@ public class DBMethods extends Database {
 		if(hasConnection()){
 			Statement stm = null;
 			try{
-				String sql = "DELETE FROM Ships WHERE ID='"+ ID +"' AND Name='"+ name +" AND Company='"+ comp +"';";
+				String sql = "DELETE FROM Ships WHERE ID='"+ ID +"' AND Name='"+ name +"' AND Company='"+ comp +"';";
 				stm = con.createStatement();
 				stm.executeUpdate(sql);
 			}catch(SQLException sqle){

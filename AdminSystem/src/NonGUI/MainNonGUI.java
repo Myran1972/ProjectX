@@ -197,8 +197,7 @@ public class MainNonGUI {
 	
 	public static void removeStaff(){
 		System.out.println("Enter ID");
-		int PID = sc.nextInt();
-		sc.nextLine();
+		String PID = sc.nextLine();
 		System.out.println("Enter lastname");
 		String lastname = sc.nextLine();
 		dbm.removePeps(PID, lastname);

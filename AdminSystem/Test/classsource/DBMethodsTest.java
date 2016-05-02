@@ -89,7 +89,7 @@ public class DBMethodsTest {
 	// Väntar på att metoderna ska bli klara.
 	@Test
 	public void TestAddPeps(){
-		dbm.addPeps("Honey", "Booboo", "A001", "S", "100%");
+		dbm.addPeps("Honey", "Booboo", "A", "S", "100%");
 		//System.out.println(result2);
 	}
 	//@Test
